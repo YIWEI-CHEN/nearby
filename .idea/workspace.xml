@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41670cd1-f816-478b-82a8-05408e57ab52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nearby/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nearby/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/nearby/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +96,7 @@
       <workItem from="1571946931892" duration="132000" />
       <workItem from="1571947117608" duration="13000" />
       <workItem from="1571947171406" duration="4253000" />
-      <workItem from="1572038411130" duration="3617000" />
+      <workItem from="1572038411130" duration="4107000" />
     </task>
     <servers />
   </component>
