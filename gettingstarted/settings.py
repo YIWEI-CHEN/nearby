@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     #ahxt
     "hello",
+    "widget_tweaks",
     'django.contrib.sites', # new
     'allauth', # new
     'allauth.account', # new
