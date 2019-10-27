@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load socialaccount %}
+
+    <body>
+<h1>Django Allauth Tutorial</h1>
+{#    <a href="{% provider_login_url 'github' %}">Github Sign Up</a>#}
+{#    <a href="{% provider_login_url 'google' %}">Google Sign Up</a>#}
+{% if user.is_authenticated %}
+<p>Welcome {{ user.username }} !!!</p>
+{% else %}
+    <a href="{% provider_login_url 'github' %}">Github Sign Up</a>
+    <a href="{% provider_login_url 'google' %}">Google Sign Up</a>
+
+{% endif %}
+
+
+
+    <form action="login" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="password" name="password" placeholder="password"><br>
+        <input type="submit">
+    </form>
+    <div>
+            <h3>
+                {% for message in messages %}
+                {{message}}
+                {% endfor %}
+            </h3>
+        </div>
+
+</body>
+
+{% endblock %}
