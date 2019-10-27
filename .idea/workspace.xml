@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41670cd1-f816-478b-82a8-05408e57ab52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/hello/templates/index.2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gettingstarted/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gettingstarted/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" afterPath="$PROJECT_DIR$/runtime.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,12 +33,15 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/anaconda3/bin/python3.6" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/hello/templates" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hello/templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/config" />
       <recent name="$PROJECT_DIR$/allauthdemo" />
@@ -97,7 +99,7 @@
       <workItem from="1571946931892" duration="132000" />
       <workItem from="1571947117608" duration="13000" />
       <workItem from="1571947171406" duration="4253000" />
-      <workItem from="1572038411130" duration="5407000" />
+      <workItem from="1572038411130" duration="6241000" />
     </task>
     <servers />
   </component>
