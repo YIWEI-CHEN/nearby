@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="41670cd1-f816-478b-82a8-05408e57ab52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/Spring2019/i0.tar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nearby/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nearby/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nearby/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nearby/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nearby/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gettingstarted/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gettingstarted/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runtime.txt" beforeDir="false" afterPath="$PROJECT_DIR$/runtime.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +97,7 @@
       <workItem from="1571946931892" duration="132000" />
       <workItem from="1571947117608" duration="13000" />
       <workItem from="1571947171406" duration="4253000" />
-      <workItem from="1572038411130" duration="4641000" />
+      <workItem from="1572038411130" duration="5407000" />
     </task>
     <servers />
   </component>
