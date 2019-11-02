@@ -14,6 +14,7 @@ import nearby.views
 #
 # Learn more here: https://docs.djangoproject.com/en/2.1/topics/http/urls/
 
+
 urlpatterns = [
     path("", nearby.views.index, name="index"),
     path("login/", nearby.views.login, name="login"),

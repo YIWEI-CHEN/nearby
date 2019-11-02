@@ -25,6 +25,7 @@ from django.urls import path, include                 # add this
 from rest_framework import routers                    # add this
 from todo import views as todo_views                  # add this
 from .views import index
+import nearby
 
 router = routers.DefaultRouter()                      # add this
 router.register(r'todos', todo_views.TodoView, 'todo')     # add this
@@ -32,5 +33,11 @@ router.register(r'todos', todo_views.TodoView, 'todo')     # add this
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))                # add this
+    path('api/', include(router.urls)),       # add this
+
+    # path("", nearby.views.index, name="index"),
+    # path("login/", nearby.views.login, name="login"),
+    # path("db/", nearby.views.db, name="db"),
+    # path("admin/", admin.site.urls),
+    # path('accounts/', include('allauth.urls')),
 ]

@@ -45,6 +45,16 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'todo',
+
+    # ahxt
+    "nearby",
+    "widget_tweaks",
+    'django.contrib.sites',  # new
+    'allauth',  # new
+    'allauth.account',  # new
+    'allauth.socialaccount',  # new
+    'allauth.socialaccount.providers.github',  # new
+    'allauth.socialaccount.providers.google',  # new
 ]
 
 MIDDLEWARE = [
@@ -138,7 +148,7 @@ STATICFILES_DIRS = []
 
 # we whitelist localhost:3000 because that's where frontend will be served
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
+    'https://localhost:3000/'
 )
 
 # If you want to serve user uploaded files add these settings
