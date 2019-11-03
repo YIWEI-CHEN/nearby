@@ -3,6 +3,7 @@ import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
+import axios from "axios";
 import {
   Grid,
   Button,
@@ -16,18 +17,6 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const schema = {
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
   email: {
     presence: { allowEmpty: false, message: 'is required' },
     email: true,
@@ -36,6 +25,12 @@ const schema = {
     }
   },
   password: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 128
+    }
+  },
+  password2: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 128
@@ -186,6 +181,17 @@ const SignUp = props => {
   };
 
   const handleSignUp = event => {
+    axios.post("/rest-auth/registration/", {
+        password1: formState.values.password,
+        password2: formState.values.password2,
+        email: formState.values.email
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     event.preventDefault();
     history.push('/');
   };
@@ -261,34 +267,6 @@ const SignUp = props => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('firstName')}
-                  fullWidth
-                  helperText={
-                    hasError('firstName') ? formState.errors.firstName[0] : null
-                  }
-                  label="First name"
-                  name="firstName"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.firstName || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('lastName')}
-                  fullWidth
-                  helperText={
-                    hasError('lastName') ? formState.errors.lastName[0] : null
-                  }
-                  label="Last name"
-                  name="lastName"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.lastName || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
                   error={hasError('email')}
                   fullWidth
                   helperText={
@@ -313,6 +291,20 @@ const SignUp = props => {
                   onChange={handleChange}
                   type="password"
                   value={formState.values.password || ''}
+                  variant="outlined"
+                />
+                <TextField
+                  className={classes.textField}
+                  error={hasError('password2')}
+                  fullWidth
+                  helperText={
+                    hasError('password2') ? formState.errors.password2[0] : null
+                  }
+                  label="Confirm Password"
+                  name="password2"
+                  onChange={handleChange}
+                  type="password"
+                  value={formState.values.password2 || ''}
                   variant="outlined"
                 />
                 <div className={classes.policy}>
