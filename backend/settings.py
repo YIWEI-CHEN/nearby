@@ -51,19 +51,11 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
-
     'todo',
-
-
     # ahxt
     "nearby",
     "widget_tweaks",
-    'django.contrib.sites',  # new
-    'allauth',  # new
-    'allauth.account',  # new
-    'allauth.socialaccount',  # new
     'allauth.socialaccount.providers.github',  # new
-    'allauth.socialaccount.providers.google',  # new
     'django_extensions',
 ]
 
