@@ -14,13 +14,19 @@ import {
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  Maps as MapsView
 } from './views';
 
 const Routes = () => {
   return (
     <Switch>
-        <RouteWithLayout
+      <Redirect
+        exact
+        from="/"
+        to="/sign-in"
+      />
+      <RouteWithLayout
         component={UserListView}
         exact
         layout={MainLayout}
@@ -31,11 +37,6 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/cases"
-      />
-      <Redirect
-        exact
-        from="/"
-        to="/sign-in"
       />
       <RouteWithLayout
         component={DashboardView}
@@ -72,6 +73,12 @@ const Routes = () => {
         exact
         layout={MinimalLayout}
         path="/not-found"
+      />
+      <RouteWithLayout
+        component={MapsView}
+        exact
+        layout={MainLayout}
+        path="/maps"
       />
       <Redirect to="/not-found" />
     </Switch>

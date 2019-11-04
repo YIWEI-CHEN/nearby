@@ -12,6 +12,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import LocationOn from "@material-ui/icons/LocationOn";
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
@@ -83,6 +84,11 @@ const Sidebar = props => {
       title: 'Nursing Cases',
       href: '/cases',
       icon: <EventIcon />
+    },
+    {
+      title: 'Maps',
+      href: '/maps',
+      icon: <LocationOn />
     }
   ];
 

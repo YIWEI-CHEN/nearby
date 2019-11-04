@@ -28,7 +28,8 @@
     "underscore": "^1.9.1",
     "uuid": "^3.3.2",
     "validate.js": "^0.13.1",
-    "videojs-record": "^3.8.0"
+    "videojs-record": "^3.8.0",
+    "react-google-maps": "9.4.5"
   },
   "scripts": {
     "start": "react-app-rewired start",
