@@ -6,8 +6,6 @@
 ## Heroku Link
 https://nearby-deepmining.herokuapp.com/
 
-<<<<<<< HEAD
-=======
 ## Prerequisites
 1. python 3 ([runtime.txt](https://github.com/YIWEI-CHEN/nearby/blob/master/runtime.txt))
 2. virtualenvwrapper   
@@ -45,4 +43,3 @@ https://nearby-deepmining.herokuapp.com/
 5. make sure you commit all changes by `git commit -am "msg"`
 6. `git push heroku master` \
 (`git push heroku HEAD:master`)
->>>>>>> edf9d2d4841d271a78c6a19e3d91e682085aae1e
