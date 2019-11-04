@@ -12,9 +12,11 @@ https://nearby-deepmining.herokuapp.com/
 3. django ([requirements.txt](https://github.com/YIWEI-CHEN/nearby/blob/master/requirements.txt))
 4. node.js \
 `brew install node`
-5. postgresql \
+5. yarn \
+`brew install yarn`
+6. postgresql \
 `brew install postgresql`
-6. heroku \
+7. heroku \
 `brew tap heroku/brew && brew install heroku`
 
 ## Setup
