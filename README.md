@@ -35,7 +35,7 @@ https://nearby-deepmining.herokuapp.com/
 4. or `yarn start` (open `localhost:3000`)
 
 ## Deployment
-1. `herolu login`
+1. `heroku login`
 2. `heroku create <Your App Name>`
 3. `heroku buildpacks:add --index 1 heroku/nodejs`
 4. `heroku buildpacks:add --index 2 heroku/python`
