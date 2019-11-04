@@ -33,7 +33,7 @@ router.register(r'todos', todo_views.TodoView, 'todo')     # add this
 urlpatterns = [
     # path('', index, name='index'),
     path('admin/', admin.site.urls),
-    # path('api/', include(router.urls)),
+    path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
     path('accounts/', include('allauth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),

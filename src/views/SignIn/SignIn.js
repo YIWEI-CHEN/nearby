@@ -177,6 +177,7 @@ const SignIn = props => {
     axios.post("/rest-auth/login/", {
         password: formState.values.password,
         email: formState.values.email
+
       })
       .then(function (response) {
         alert("Logged in");
