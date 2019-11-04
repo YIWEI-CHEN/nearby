@@ -2,9 +2,16 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
-import { Minimal as MinimalLayout } from './layouts';
+import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
+  Dashboard as DashboardView,
+  ProductList as ProductListView,
+  UserList as UserListView,
+  // Typography as TypographyView,
+  // Icons as IconsView,
+  Account as AccountView,
+  Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
   NotFound as NotFoundView
@@ -13,10 +20,40 @@ import {
 const Routes = () => {
   return (
     <Switch>
+        <RouteWithLayout
+        component={UserListView}
+        exact
+        layout={MainLayout}
+        path="/under_guardianship"
+      />
+      <RouteWithLayout
+        component={ProductListView}
+        exact
+        layout={MainLayout}
+        path="/cases"
+      />
       <Redirect
         exact
         from="/"
         to="/sign-in"
+      />
+      <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainLayout}
+        path="/dashboard"
+      />
+      <RouteWithLayout
+        component={AccountView}
+        exact
+        layout={MainLayout}
+        path="/account"
+      />
+      <RouteWithLayout
+        component={SettingsView}
+        exact
+        layout={MainLayout}
+        path="/settings"
       />
       <RouteWithLayout
         component={SignUpView}

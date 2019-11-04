@@ -14,6 +14,7 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { Google as GoogleIcon } from 'icons';
+import axios from "axios";
 
 const schema = {
   email: {
@@ -172,7 +173,21 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    history.push('/');
+
+    axios.post("/rest-auth/login/", {
+        password: formState.values.password,
+        email: formState.values.email
+      })
+      .then(function (response) {
+        alert("Logged in");
+        console.log(response);
+        history.push('/account');
+      })
+      .catch(function (error) {
+        alert(error.message);
+        console.log(error);
+        history.push('/sign-in');
+      });
   };
 
   const hasError = field =>
@@ -195,21 +210,20 @@ const SignIn = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
+                Whoever needs, we are nearby to help.
               </Typography>
               <div className={classes.person}>
                 <Typography
                   className={classes.name}
                   variant="body1"
                 >
-                  Takamaru Ayako
+                  Chien-Ping Chen
                 </Typography>
                 <Typography
                   className={classes.bio}
                   variant="body2"
                 >
-                  Manager at inVision
+                  Founder at DeepMining
                 </Typography>
               </div>
             </div>

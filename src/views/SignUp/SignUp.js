@@ -181,19 +181,23 @@ const SignUp = props => {
   };
 
   const handleSignUp = event => {
+    event.preventDefault();
+
     axios.post("/rest-auth/registration/", {
         password1: formState.values.password,
         password2: formState.values.password2,
         email: formState.values.email
       })
       .then(function (response) {
+        alert("Logged in");
         console.log(response);
+        history.push('/account');
       })
       .catch(function (error) {
+        alert(error.message);
         console.log(error);
+        history.push('/sign-up');
       });
-    event.preventDefault();
-    history.push('/');
   };
 
   const hasError = field =>
@@ -216,21 +220,20 @@ const SignUp = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
+                Whoever needs, we are nearby to help.
               </Typography>
               <div className={classes.person}>
                 <Typography
                   className={classes.name}
                   variant="body1"
                 >
-                  Takamaru Ayako
+                  Chien-Ping Chen
                 </Typography>
                 <Typography
                   className={classes.bio}
                   variant="body2"
                 >
-                  Manager at inVision
+                  Founder at DeepMining
                 </Typography>
               </div>
             </div>
