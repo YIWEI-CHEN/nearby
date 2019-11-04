@@ -1,4 +1,4 @@
-# nearby
+# NearBy
 > Whoever needs, we are nearby to help.
 
 - With increasing demand in senior care, we aim to develop a platform offering peer-to-peer in-home care service.
