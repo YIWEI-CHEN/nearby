@@ -7,7 +7,7 @@ import {
   Marker
 } from "react-google-maps";
 
-const GOOGLE_API_KEY = 'AIzaSyDnZez8EEF9Wbiu8rJngHfexlrLXOkejGU';
+const GOOGLE_API_KEY = 'Your Key';
 const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;
 
 const CustomSkinMap = withScriptjs(
