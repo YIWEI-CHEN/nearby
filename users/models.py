@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 from django_localflavor_us.models import USStateField
+from languages.fields import LanguageField
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -18,14 +19,37 @@ class CustomUser(AbstractUser):
     is_taker = models.BooleanField(_('taker status'), default=False)
     is_provider = models.BooleanField(_('provider status'), default=False)
     is_guardian = models.BooleanField(_('guardian status'), default=False)
+    CUSTOM_LANGUAGE_CHOICES = (
+        ("zh", _(u"Chinese")),
+        ("en", _(u"English")),
+        ("es", _(u"Spanish")),
+    )
+    language = LanguageField(_('preferred language'), default="en", choices=CUSTOM_LANGUAGE_CHOICES)
+    MEDICARE_CHOICES = (
+        ("A", _("A")),
+        ("B", _("B")),
+        ("C", _("C")),
+        ("D", _("D")),
+    )
+
+    medicare = models.CharField(_('medicare'), max_length=1, choices=MEDICARE_CHOICES, default='A')
+    TRUE_FALSE_CHOICES = (
+        ("Y", 'Yes'),
+        ("N", 'No')
+    )
+    medicaid = models.CharField(_('medicaid'), max_length=1, choices=TRUE_FALSE_CHOICES, default='Y')
+    disable = models.CharField(_('disable in action'), max_length=1, choices=TRUE_FALSE_CHOICES, default='N')
+    chronic = models.CharField(_('chronic disease'), max_length=1, choices=TRUE_FALSE_CHOICES, default='N')
+    at_home_member = models.CharField(_('family member at home'), max_length=1, choices=TRUE_FALSE_CHOICES, default='N')
 
     def __str__(self):
         return self.email
 
+
 class Address(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-    address = models.CharField(_("address"), max_length=128, blank=True, null=True)
+    address = models.CharField(_("address"), max_length=128)
 
     city = models.CharField(_("city"), max_length=64, default="College Station")
     state = USStateField(_('state'), default="TX")
@@ -48,9 +72,9 @@ class Address(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-    card_number = CardNumberField(_("card number"), blank=True, null=True)
-    card_expiry = CardExpiryField(_("expiration date"), blank=True, null=True)
-    card_code = SecurityCodeField(_("security code"), blank=True, null=True)
+    card_number = CardNumberField(_("card number"))
+    card_expiry = CardExpiryField(_("expiration date"))
+    card_code = SecurityCodeField(_("security code"))
 
     def __str__(self):
-        return self.id
+        return '{}'.format(self.id)

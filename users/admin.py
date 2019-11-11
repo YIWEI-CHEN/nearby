@@ -7,15 +7,18 @@ from .models import CustomUser, Address, Payment
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = (
-        'username', 'email', 'is_active', 'last_login',
-        'gender',  'phone_number',
+        'email', 'is_active',
+        'gender',
         'is_taker', 'is_provider', 'is_guardian',
-        'date_of_birth',
     )
     list_filter = ('email', 'is_active', 'gender', )
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
+        ('Personal info', {
+            'fields': ('first_name', 'last_name', 'gender', 'date_of_birth','language',)}),
+        ('Roles', {'fields': ('is_taker', 'is_provider', 'is_guardian')}),
+        ('Medical info', {'fields': ('medicare', 'medicaid', 'disable', 'chronic', 'at_home_member',)}),
+        ('Contact info', {'fields': ('phone_number',)}),
     )
     add_fieldsets = (
         (None, {
@@ -35,12 +38,6 @@ class AddressAdmin(admin.ModelAdmin):
         'state',
         'zip_code',
         'country',
-    )
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('user', 'address', 'city', 'state', 'zip_code', 'country')}
-         ),
     )
 
 

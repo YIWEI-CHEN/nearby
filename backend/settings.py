@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'django_countries',
     'users',
+    'languages',
 ]
 
 SITE_ID = 1
@@ -134,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 
@@ -170,7 +171,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
