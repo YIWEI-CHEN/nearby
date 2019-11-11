@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'todo',
     'django_extensions',
     'phonenumber_field',
-    'django_countries'
+    'django_countries',
     'users',
 ]
 
