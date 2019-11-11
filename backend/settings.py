@@ -54,6 +54,9 @@ INSTALLED_APPS = [
 
     'todo',
     'django_extensions',
+    'phonenumber_field',
+    'django_countries'
+    'users',
 ]
 
 SITE_ID = 1
@@ -167,8 +170,13 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
    "allauth.account.auth_backends.AuthenticationBackend"
 )
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+PHONENUMBER_DEFAULT_REGION = 'US'
