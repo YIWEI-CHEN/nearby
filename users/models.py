@@ -78,3 +78,23 @@ class Payment(models.Model):
 
     def __str__(self):
         return '{}'.format(self.id)
+
+
+class CareService(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    ROLE_CHOICES = (
+        ('T', 'Taker'),
+        ('P', 'Provider'),
+    )
+    role = models.CharField(_('which role registers services'), max_length=1, choices=ROLE_CHOICES, default='T')
+
+    blood_pressure = models.BooleanField(_('measure blood pressure'), default=False)
+    blood_test = models.BooleanField(_('draw blood for testing'), default=False)
+    blood_sugar = models.BooleanField(_('measure blood sugar'), default=False)
+    temperature = models.BooleanField(_('measure body temperature'), default=False)
+    medicine_deliver = models.BooleanField(_('pick medicine and deliver'), default=False)
+    meal_deliver = models.BooleanField(_('deliver nutritious meals'), default=False)
+    feeding = models.BooleanField(_('help feeding'), default=False)
+    washing = models.BooleanField(_('help washing body'), default=False)
+    accompany_clinic = models.BooleanField(_('accompany people to clinic visit'), default=False)
+    limb_exercise = models.BooleanField(_('help limbs exercise'), default=False)

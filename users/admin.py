@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import CustomUser, Address, Payment
+from .models import CustomUser, Address, Payment, CareService
 
 
 class CustomUserAdmin(UserAdmin):
@@ -43,12 +43,38 @@ class AddressAdmin(admin.ModelAdmin):
 
 class PaymentAdmin(admin.ModelAdmin):
     list_display = (
+        'user',
         'card_number',
         'card_expiry',
         'card_code',
     )
 
 
+class CareServiceAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'role',
+        "blood_pressure",
+        "blood_test",
+        "blood_sugar",
+        "temperature",
+        "medicine_deliver",
+        "meal_deliver",
+        "feeding",
+        "washing",
+        "accompany_clinic",
+        "limb_exercise",
+    )
+    fieldsets = (
+        (None, {'fields': ('user', 'role')}),
+        ('Measurement', {
+            'fields': ('blood_pressure', 'blood_test', 'blood_sugar', 'temperature')}),
+        ('Delivery', {'fields': ('medicine_deliver', 'meal_deliver', 'accompany_clinic')}),
+        ('Others', {'fields': ('feeding', 'washing', 'limb_exercise')}),
+    )
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(CareService, CareServiceAdmin)
