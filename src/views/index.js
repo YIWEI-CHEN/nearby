@@ -6,4 +6,4 @@ export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
 export { default as ProductList } from './ProductList';
 export { default as UserList } from './UserList';
-export { default as onepirate } from './onepirate';
+export { default as Onepirate } from './Onepirate';
