@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from 'react-router-dom';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 
@@ -53,23 +54,23 @@ function AppAppBar(props) {
             {'nearby'}
           </Link>
           <div className={classes.right}>
-            <Link
+            <RouterLink
               color="inherit"
               variant="h6"
               underline="none"
               className={classes.rightLink}
-              href="/sign-in"
+              to="/sign-in"
             >
               {'Sign In'}
-            </Link>
-            <Link
+            </RouterLink>
+            <RouterLink
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/sign-up"
+              to="/sign-in"
             >
               {'Sign Up'}
-            </Link>
+            </RouterLink>
           </div>
         </Toolbar>
       </AppBar>

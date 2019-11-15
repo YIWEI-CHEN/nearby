@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
+import { Link as RouterLink } from 'react-router-dom';
+
+const CustomRouterLink = forwardRef((props, ref) => (
+  <div
+    ref={ref}
+    style={{ flexGrow: 1 }}
+  >
+    <RouterLink {...props} />
+  </div>
+));
 
 const styles = theme => ({
   root: {
@@ -114,8 +124,8 @@ function ProductHowItWorks(props) {
           size="large"
           variant="contained"
           className={classes.button}
-          component="a"
-          href="/sign-up"
+          component={CustomRouterLink}
+          to="/sign-up"
         >
           Get started
         </Button>
