@@ -9,7 +9,7 @@ import {
 } from "react-google-maps";
 
 import { compose, withProps, withStateHandlers } from "recompose";
-const GOOGLE_API_KEY = 'AIzaSyAGWkTVfH4RA2sRbFN9dY489Q-T1At2Fqk';
+const GOOGLE_API_KEY = 'Google-API-KEY';
 const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;
 
 function handleClick(lat, lng){
