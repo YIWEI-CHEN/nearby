@@ -67,7 +67,7 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              to="/sign-in"
+              to="/sign-up"
             >
               {'Sign Up'}
             </RouterLink>
