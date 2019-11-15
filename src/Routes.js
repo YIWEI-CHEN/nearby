@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
-import { RouteWithLayout } from './components';
+import { RouteWithLayout, RouteWithoutLayout } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
@@ -15,17 +15,13 @@ import {
   SignUp as SignUpView,
   SignIn as SignInView,
   NotFound as NotFoundView,
-  Maps as MapsView
+  Maps as MapsView,
+  Onepirate as HomeView
 } from './views';
 
 const Routes = () => {
   return (
     <Switch>
-      <Redirect
-        exact
-        from="/"
-        to="/sign-in"
-      />
       <RouteWithLayout
         component={UserListView}
         exact
@@ -37,6 +33,11 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/cases"
+      />
+      <Redirect
+        exact
+        from="/"
+        to="/home"
       />
       <RouteWithLayout
         component={DashboardView}
@@ -79,6 +80,11 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/maps"
+      />
+      <RouteWithoutLayout
+        component={HomeView}
+        exact
+        path="/home"
       />
       <Redirect to="/not-found" />
     </Switch>
