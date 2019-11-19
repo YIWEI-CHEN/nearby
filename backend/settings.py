@@ -56,8 +56,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'phonenumber_field',
     'django_countries',
-    'users',
     'languages',
+    'profiles',
 ]
 
 SITE_ID = 1
@@ -176,7 +176,5 @@ AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
    "allauth.account.auth_backends.AuthenticationBackend"
 )
-
-AUTH_USER_MODEL = 'users.CustomUser'
 
 PHONENUMBER_DEFAULT_REGION = 'US'
