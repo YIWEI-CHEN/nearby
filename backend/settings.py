@@ -24,6 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+oo!jpn85%7*l_-1lcni8adkf8l*pvlqwkx9f02tl941kjhdhb'
 
+CSRF_COOKIE_NAME = "csrftoken"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -52,10 +54,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'todo',
+
     # ahxt
     "nearby",
     "widget_tweaks",
     'allauth.socialaccount.providers.github',  # new
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+
     'django_extensions',
 ]
 
