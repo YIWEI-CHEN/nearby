@@ -30,8 +30,8 @@ https://nearby-deepmining.herokuapp.com/
 
 ## Local Testing
 1. `yarn build`
-2. `python manager.py migrate`
-3. `python manager.py runserver` (open `localhost:8000`)
+2. `python manage.py migrate`
+3. `python manage.py runserver` (open `localhost:8000`)
 4. or `yarn start` (open `localhost:3000`)
 
 ## Deployment
