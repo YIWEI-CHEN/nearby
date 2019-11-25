@@ -194,50 +194,8 @@ const SignIn = props => {
 
     const handleGoogleSignIn = event => {
         event.preventDefault();
-
-        alert("testing google!!")
-
-
-             axios.get("/accounts/google/login/",{crossDomain: true,
-dataType: 'jsonp'})
-            .then(function (response) {
-                alert("Logged in");
-                console.log(response);
-                history.push('/account');
-            })
-            .catch(function (error) {
-                alert(error.message);
-                console.log(error);
-                history.push('/sign-in');
-            });
-
-        // axios.post("/rest-auth/google/", {})
-        //     .then(function (response) {
-        //         alert("Logged in");
-        //         console.log(response);
-        //         history.push('/account');
-        //     })
-        //     .catch(function (error) {
-        //         alert(error.message);
-        //         console.log(error);
-        //         history.push('/sign-in');
-        //     });
-
-        // axios.post("/rest-auth/login/", {
-        //     password: formState.values.password,
-        //     email: formState.values.email
-        //
-        //   })
-        //   .then(function (response) {
-        //     alert("Logged in");
-        //     console.log(response);
-        //     history.push('/account');
-        //   })
-        //   .catch(function (error) {
-        //     alert(error.message);
-        //     console.log(error);
-        //     history.push('/sign-in');
-        //   });
+        // alert("testing google window!!")
+        window.location.href='/accounts/google/login/';
     };
 
 
@@ -323,6 +281,9 @@ dataType: 'jsonp'})
                                             <GoogleIcon className={classes.socialIcon}/>
                                             Login with Google
                                         </Button>
+
+
+
                                     </Grid>
 
                                 </Grid>

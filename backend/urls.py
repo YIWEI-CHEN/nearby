@@ -41,6 +41,7 @@ urlpatterns = [
 
 
     ## ahxt
+    path('redirect_to_account/', index),
     path("", index, name="index"),
     path("index", index, name="index"),
     path("login/", login, name="login"),
