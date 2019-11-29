@@ -39,6 +39,12 @@ const Routes = () => {
         from="/"
         to="/home"
       />
+      <Redirect
+        exact
+        from="/redirect_to_account"
+        to="/account"
+      />
+
       <RouteWithLayout
         component={DashboardView}
         exact
