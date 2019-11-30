@@ -64,6 +64,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',
 
     'django_extensions',
+    'phonenumber_field',
+    'django_countries',
+    'languages',
+    'profiles',
 ]
 
 SITE_ID = 1
@@ -141,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 
@@ -182,3 +186,5 @@ AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
    "allauth.account.auth_backends.AuthenticationBackend"
 )
+
+PHONENUMBER_DEFAULT_REGION = 'US'
