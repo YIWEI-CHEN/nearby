@@ -14,6 +14,8 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import StarRateIcon from '@material-ui/icons/StarRate';
 
+import { ReserveDialog} from './components';
+
 const useStyles = makeStyles(theme => ({
   root: {
   },
@@ -49,6 +51,17 @@ const ProviderCard = props => {
   const { className, provider, ...rest } = props;
 
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   return (
     <Card
@@ -117,9 +130,11 @@ const ProviderCard = props => {
               color="primary"
               variant="contained"
               size="small"
+              onClick={handleClickOpen}
             >
               Reserve
             </Button>
+            <ReserveDialog open={open} onClose={handleClose} provider={provider} />
           </Grid>
         </Grid>
       </CardActions>
