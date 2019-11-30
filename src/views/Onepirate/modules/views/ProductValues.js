@@ -43,25 +43,25 @@ function ProductValues(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productCurvyLines.png"
-          className={classes.curvyLines}
-          alt="curvy lines"
-        />
+        {/*<img*/}
+          {/*src="/static/themes/onepirate/productCurvyLines.png"*/}
+          {/*className={classes.curvyLines}*/}
+          {/*alt="curvy lines"*/}
+        {/*/>*/}
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues1.svg"
+                src="https://ld-wp73.template-help.com/beclinic/default/wp-content/uploads/2019/10/icon-img-1.png"
                 alt="suitcase"
               />
               <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+                Experienced Medical Specialists
               </Typography>
               <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+                {'Your health is your most important asset.'}
+                {'You should entrust it only to the best professionals.'}
               </Typography>
             </div>
           </Grid>
@@ -69,15 +69,15 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues2.svg"
+                src="https://ld-wp73.template-help.com/beclinic/default/wp-content/uploads/2019/10/icon-img-2.png"
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
-                New experiences
+                Personalized Treatment
               </Typography>
               <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
+                {'Treatment choices perfectly match your goals of treatment complications with early intervention.'}
+                {'complications with early intervention.'}
               </Typography>
             </div>
           </Grid>
@@ -85,15 +85,15 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues3.svg"
+                src="https://ld-wp73.template-help.com/beclinic/default/wp-content/uploads/2019/10/icon-img-3.png"
                 alt="clock"
               />
               <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+                Quality and Safety
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'All team members and care providers at Nearby have been trained '}
+                {'thoroughly to assist in any situation.'}
               </Typography>
             </div>
           </Grid>
