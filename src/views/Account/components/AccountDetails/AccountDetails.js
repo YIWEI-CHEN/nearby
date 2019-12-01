@@ -12,10 +12,27 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
+import axios from "axios";
 
 const useStyles = makeStyles(() => ({
+
   root: {}
+
 }));
+
+
+
+
+// const [values, setValues] = useState({
+//     firstName: 'Angel',
+//     lastName: 'Christina',
+//     email: 'angel@tamu.edu',
+//     phone: '9799115691',
+//     state: 'texas',
+//     country: 'USA'
+//   });
+//
+
 
 const AccountDetails = props => {
   const { className, ...rest } = props;
@@ -31,11 +48,27 @@ const AccountDetails = props => {
     country: 'USA'
   });
 
+
   const handleChange = event => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
+  };
+
+  const handleUpdataProfiles = event => {
+      console.log( "test update" )
+      console.log(values);
+      event.preventDefault();
+
+      axios.post("/update_profiles/", {values})
+            .then(function (response) {
+                console.log( "sucess repeonse" )
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
   };
 
   const states = [
@@ -188,12 +221,15 @@ const AccountDetails = props => {
           </Grid>
         </CardContent>
         <Divider />
+
         <CardActions>
           <Button
             color="primary"
             variant="contained"
+            onClick={handleUpdataProfiles}
           >
             Save details
+
           </Button>
         </CardActions>
       </form>

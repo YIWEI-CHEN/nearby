@@ -12,6 +12,23 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class GeneralProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    firstName = models.CharField(_("firstName"), max_length=64, default="College Station")
+    lastName = models.CharField(_("lastName"), max_length=64, default="College Station")
+    email = models.CharField(_("email"), max_length=64, default="College Station")
+    phone = models.CharField(_("phone"), max_length=64, default="College Station")
+    state = models.CharField(_("state"), max_length=64, default="College Station")
+    country = models.CharField(_("country"), max_length=64, default="College Station")
+
+
+class GeneralProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    firstName = models.CharField(_("firstName"), max_length=64, default="College Station")
+    lastName = models.CharField(_("lastName"), max_length=64, default="College Station")
+    email = models.CharField(_("email"), max_length=64, default="College Station")
+    phone = models.CharField(_("phone"), max_length=64, default="College Station")
+    state = models.CharField(_("state"), max_length=64, default="College Station")
+    country = models.CharField(_("country"), max_length=64, default="College Station")
+
     phone_number = PhoneNumberField(_('phone number'), blank=True, null=True)
     GENDER_CHOICES = (
         ('M', 'Male'),
