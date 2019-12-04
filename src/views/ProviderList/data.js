@@ -14,6 +14,11 @@ export default [
       { label: 'Upper Limbs Moving', price: '1' },
       { label: 'Turn Body Over', price: '1' },
     ],
+    languages: [
+      'English',
+      'Chinese',
+      'Spanish'
+    ],
     updatedAt: '27/03/2019'
   },
   {
@@ -29,6 +34,10 @@ export default [
       { label: 'Body Temperature Measurement', price: '1' },
       { label: 'Medicine Feeding', price: '1' },
       { label: 'Shower', price: '1' },
+    ],
+    languages: [
+      'Chinese',
+      'Spanish'
     ],
     createdAt: '31/03/2019'
   },
@@ -51,6 +60,10 @@ export default [
       { label: 'Upper Limbs Moving', price: '1' },
       { label: 'Turn Body Over', price: '1' },
     ],
+    languages: [
+      'English',
+      'Spanish'
+    ],
     createdAt: '03/04/2019'
   },
   {
@@ -64,6 +77,9 @@ export default [
       { label: 'Food Feeding', price: '1' },
       { label: 'Bed Bathing', price: '1' },
       { label: 'Body Temperature Measurement', price: '1' },
+    ],
+    languages: [
+      'English',
     ],
     createdAt: '04/04/2019'
   },
@@ -79,6 +95,10 @@ export default [
       { label: 'Body Temperature Measurement', price: '1' },
       { label: 'Turn Body Over', price: '1' },
       { label: 'Medicine Feeding', price: '1' },
+    ],
+    languages: [
+      'English',
+      'Chinese',
     ]
   },
   {
@@ -94,6 +114,10 @@ export default [
       { label: 'Medicine Feeding', price: '1' },
       { label: 'Blood Sugar Measurement', price: '1' },
       { label: 'Body Temperature Measurement', price: '1' },
-    ]
+    ],
+    languages: [
+      'English',
+      'Spanish'
+    ],
   }
 ];

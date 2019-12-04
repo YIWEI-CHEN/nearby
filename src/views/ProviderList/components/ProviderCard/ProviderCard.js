@@ -83,6 +83,24 @@ const ProviderCard = props => {
         >
           {provider.name}
         </Typography>
+        <Divider variant="middle" />
+        <Typography gutterBottom variant="body1">
+          Languages
+        </Typography>
+        {provider.languages.map(data => {
+          return (
+            <Chip
+              label={data}
+              className={classes.chip}
+              variant="outlined"
+              color="secondary"
+            />
+          );
+        })}
+        <Divider variant="middle" />
+        <Typography gutterBottom variant="body1">
+          Provided Services
+        </Typography>
         {/*<Chip className={classes.chip} label="Measurement" variant="outlined"/>*/}
         {/*<Chip className={classes.chip} color="primary" label="Cleanness" variant="outlined"/>*/}
         {/*<Chip className={classes.chip} label="Feeding" variant="outlined"/>*/}
