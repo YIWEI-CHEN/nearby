@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProviderCard = props => {
-  const { className, provider, ...rest } = props;
+  const { className, provider, history, isReserved, ...rest } = props;
 
   const classes = useStyles();
 
@@ -152,7 +152,7 @@ const ProviderCard = props => {
             >
               Reserve
             </Button>
-            <ReserveDialog open={open} onClose={handleClose} provider={provider} />
+            <ReserveDialog open={open} onClose={handleClose} provider={provider} history={history} isReserved={isReserved}/>
           </Grid>
         </Grid>
       </CardActions>
@@ -162,7 +162,9 @@ const ProviderCard = props => {
 
 ProviderCard.propTypes = {
   className: PropTypes.string,
-  provider: PropTypes.object.isRequired
+  provider: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  isReserved: PropTypes.func.isRequired,
 };
 
 export default ProviderCard;
