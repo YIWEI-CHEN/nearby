@@ -33,7 +33,7 @@ class CaseStatus(ChoiceEnum):
 
 class CareCase(models.Model):
     time = models.DateTimeField(_('service time'))
-    note = models.TextField(_('note'))
+    note = models.TextField(_('note'), blank=True, null=True)
     provider = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -44,9 +44,9 @@ class CareCase(models.Model):
         on_delete=models.CASCADE,
         related_name=_('taker'),
     )
-    provider_feedback = models.TextField(_('provider feedback'))
-    taker_feedback = models.TextField(_('taker feedback'))
-    star = models.IntegerField(_('star'))
+    provider_feedback = models.TextField(_('provider feedback'), blank=True, null=True)
+    taker_feedback = models.TextField(_('taker feedback'), blank=True, null=True)
+    star = models.IntegerField(_('star'), default=5.0, blank=True)
     status = models.IntegerField(_('status'), choices=ChoiceEnum.choices(), default=int(CaseStatus.INIT))
     # video = models.FileField(_('video'), upload_to='/static/videos', null=True)
 
@@ -54,7 +54,7 @@ class CareCase(models.Model):
 class CareService(models.Model):
     name = models.CharField(_('care service name'), max_length=30)
     price = models.IntegerField(_('price'))
-    checked = models.BooleanField(_('checked'))
+    checked = models.BooleanField(_('checked'), default=False, blank=True)
     case = models.ForeignKey(CareCase, on_delete=models.CASCADE)
 
     def __str__(self):
