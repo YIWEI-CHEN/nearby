@@ -24,6 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+oo!jpn85%7*l_-1lcni8adkf8l*pvlqwkx9f02tl941kjhdhb'
 
+CSRF_COOKIE_NAME = "csrftoken"
+LOGIN_REDIRECT_URL="/redirect_to_account"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -52,9 +55,20 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'todo',
+    # ahxt
+    "nearby",
+    "widget_tweaks",
+    'allauth.socialaccount.providers.github',  # new
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+
     'django_extensions',
+    'todo',
     'carecases',
+    'phonenumber_field',
+    'django_countries',
+    'languages',
+    'profiles',
 ]
 
 SITE_ID = 1
@@ -132,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 
@@ -155,7 +169,7 @@ STATICFILES_DIRS = []
 
 # we whitelist localhost:3000 because that's where frontend will be served
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
+    'https://localhost:3000/'
 )
 
 # If you want to serve user uploaded files add these settings
@@ -173,3 +187,5 @@ AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
    "allauth.account.auth_backends.AuthenticationBackend"
 )
+
+PHONENUMBER_DEFAULT_REGION = 'US'
