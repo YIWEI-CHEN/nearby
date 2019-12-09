@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
     'todo',
     'django_extensions',
+    'carecases',
 ]
 
 SITE_ID = 1
