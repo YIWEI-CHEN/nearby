@@ -52,6 +52,9 @@ const AccountDetails = props => {
   data = read_profiles();
   // data= data.PromiseValue
   console.log(data);
+  console.log(data.__proto__);
+
+  console.log(data.Promise);
 
 
   const [values, setValues] = useState({
