@@ -15,29 +15,44 @@ import {
 import axios from "axios";
 
 const useStyles = makeStyles(() => ({
-
   root: {}
-
 }));
 
 
 
 
-// const [values, setValues] = useState({
-//     firstName: 'Angel',
-//     lastName: 'Christina',
-//     email: 'angel@tamu.edu',
-//     phone: '9799115691',
-//     state: 'texas',
-//     country: 'USA'
-//   });
 //
+// function axiosGet() {
+//              axios.get("/read_profiles/")
+//             .then(function (response) {
+//                 console.log( "sucess repeonse" )
+//                 // console.log(response);
+//                 data = response.data
+//                 console.log(data);
+//                 return data;
+//             })
+//             .catch(function (error) {
+//                 console.log(error);
+//             });
+// }
 
+// const data = await axios.get("/read_profiles/");
 
 const AccountDetails = props => {
+
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  // read_profiles();
+
+  var data;
+  async function read_profiles()  {
+      return  await axios.get("/read_profiles/")
+  }
+  data = read_profiles();
+  data= data.PromiseValue
+  console.log(data);
+
 
   const [values, setValues] = useState({
     firstName: 'Angel',
@@ -47,6 +62,7 @@ const AccountDetails = props => {
     state: 'texas',
     country: 'USA'
   });
+
 
 
   const handleChange = event => {

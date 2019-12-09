@@ -26,7 +26,7 @@ from rest_framework import routers                    # add this
 from todo import views as todo_views                  # add this
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
-from profiles.views import update_profiles
+from profiles.views import update_profiles, read_profiles
 
 router = routers.DefaultRouter()                      # add this
 router.register(r'todos', todo_views.TodoView, 'todo')     # add this
@@ -52,7 +52,9 @@ urlpatterns = [
     path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
 
     ##ahxt
-    path('update_profiles/', update_profiles)
+    path('update_profiles/', update_profiles),
+    path('read_profiles/', read_profiles)
+
 
 
 ]

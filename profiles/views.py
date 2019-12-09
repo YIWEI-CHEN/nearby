@@ -1,7 +1,8 @@
 
 import uuid
 from profiles.models import GeneralProfile
-from rest_framework import serializers
+# from rest_framework import serializers
+from django.core import serializers
 from django.http import HttpResponse
 import json
 from profiles import models
@@ -23,7 +24,11 @@ def update_profiles( request ):
 
 def read_profiles( request ):
     print( "read_profiles!!" )
-    data = {}
-    a = models.GeneralProfile.objects.all()
+    print( request.user.id )
+    print(request.user)
+    data = { "data":"test" }
+
+    a = models.GeneralProfile.objects.filter(user=request.user)
+    print( a )
     data['result'] = json.loads(serializers.serialize("json", a))
     return HttpResponse( json.dumps(data), content_type="application/json"  )
