@@ -50,7 +50,7 @@ const AccountDetails = props => {
       return  await axios.get("/read_profiles/")
   }
   data = read_profiles();
-  data= data.PromiseValue
+  // data= data.PromiseValue
   console.log(data);
 
 
