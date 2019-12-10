@@ -22,6 +22,20 @@ def update_profiles( request ):
     return HttpResponse( json.dumps(res), content_type="application/json"  )
 
 
+
+def create_profiles( request ):
+    print( "come in!!" )
+    data = json.loads( request.body )["values"]
+    data["user_id"] = request.user.id
+    data["user"]  = request.user
+    print( data )
+    models.GeneralProfile.objects.create( **data )
+    res = {
+        "success":True
+    }
+    return HttpResponse( json.dumps(res), content_type="application/json"  )
+
+
 def read_profiles( request ):
     print( "read_profiles!!" )
     print( request.user.id )

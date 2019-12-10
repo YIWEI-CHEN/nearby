@@ -20,7 +20,8 @@ import {
   Onepirate as HomeView
 } from './views';
 
-const Routes = () => {
+const Routes = props => {
+    console.log( props )
   return (
     <Switch>
       <RouteWithLayout

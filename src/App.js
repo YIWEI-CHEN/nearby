@@ -72,8 +72,6 @@ constructor(props){
         users:response,
         isLoaded:true
       });
-
-        console.log( _this.state )
     })
     .catch(function (error) {
       console.log(error);
@@ -82,7 +80,9 @@ constructor(props){
         error:error
       })
     })
+      console.log( _this.state )
   }
+
 
 
 
@@ -202,6 +202,7 @@ constructor(props){
           // />
         // ) : null}
       // </main>
+
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
           <Routes />

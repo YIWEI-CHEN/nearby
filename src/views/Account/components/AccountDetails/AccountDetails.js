@@ -1,84 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
+import {makeStyles} from '@material-ui/styles';
 import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Divider,
-  Grid,
-  Button,
-  TextField
+    Card,
+    CardHeader,
+    CardContent,
+    CardActions,
+    Divider,
+    Grid,
+    Button,
+    TextField
 } from '@material-ui/core';
 import axios from "axios";
 
-
-
-class AccountDetails extends React.Component {
-
-
-
-
-  render() {
-
-
 const useStyles = makeStyles(() => ({
-          root: {}
-        }));
+    root: {}
+}));
 
-
- const [values, setValues] = useState({
-            firstName: 'Angel',
-            lastName: 'Christina',
-            email: 'angel@tamu.edu',
-            phone: '9799115691',
-            state: 'texas',
-            country: 'USA'
-          });
-
-
-          const handleChange = event => {
-            setValues({
-              ...values,
-              [event.target.name]: event.target.value
-            });
-          };
-
-          const handleUpdataProfiles = event => {
-            console.log("test update")
-            console.log(values);
-            event.preventDefault();
-
-            axios.post("/update_profiles/", {values})
-                .then(function (response) {
-                  console.log("sucess repeonse")
-                  console.log(response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-          };
-
-          const states = [
-            // {
-            //   value: 'texas',
-            //   lable: 'Texas'
-            // },
-            {
-              value: 'alabama',
-              label: 'Alabama'
-            },
-            {
-              value: 'new-york',
-              label: 'New York'
-            },
-            {
-              value: 'san-francisco',
-              label: 'San Francisco'
-            }
-          ];
 
 //
 // function axiosGet() {
@@ -97,197 +36,231 @@ const useStyles = makeStyles(() => ({
 
 // const data = await axios.get("/read_profiles/");
 
+const AccountDetails = props => {
 
 
-          console.log(this.props)
-
-          const {className, ...rest} = this.props;
-
-          console.log(className, rest)
-
-          // const classes = useStyles();
-
-
-          // // read_profiles();
-          //
-          // var data, data2;
-          // async function read_profiles()  {
-          //     return  await axios.get("/read_profiles/")
-          // }
-          // data = read_profiles();
-          // // data= data.PromiseValue
-          //
-          // data.then(function (result) {
-          //   data2 = result
-          //
-          //   // console.log( data2 )
-          // }
-          // )
+    const [values, setValues] = useState({
+        firstName: 'None',
+        lastName: 'None',
+        email: 'angel@tamu.edu',
+        phone: 'None',
+        state: 'None',
+        country: 'None'
+    });
 
 
-          // console.log(this.props.show)
-          // console.log(data);
-          // console.log(data2);
-          // console.log(data.__proto__);
-          // console.log(data.PromiseStatus);
-          // console.log(data.PromiseValue);
+    useEffect(() => {
+        axios
+            .get(
+                '/read_profiles/'
+            )
+            .then(
+                ({data}) => {
+                    console.log(data.result[0].fields);
+                    const values = data.result[0].fields;
+                    // console.log(data[0]);
+                    setValues(values);
+                    console.log(values);
+                });
+    }, []);
 
+    // console.log(values);
 
+    const {className, ...rest} = props;
 
+    const classes = useStyles();
 
-          return (
+    const handleChange = event => {
+        setValues({
+            ...values,
+            [event.target.name]: event.target.value
+        });
+    };
 
-              <Card
-                  {...rest}
-                  // className={clsx(classes.root, className)}
-              >
-                <form
-                    autoComplete="off"
-                    noValidate
-                >
-                  <CardHeader
-                      subheader="The information can be edited"
-                      title="Profile"
-                  />
-                  <Divider/>
-                  <CardContent>
+    const handleUpdataProfiles = event => {
+        console.log("test update")
+        console.log(values);
+        event.preventDefault();
+
+        axios.post("/update_profiles/", {values})
+            .then(function (response) {
+                console.log("sucess repeonse")
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    const states = [
+        // {
+        //   value: 'texas',
+        //   lable: 'Texas'
+        // },
+        {
+            value: 'alabama',
+            label: 'Alabama'
+        },
+        {
+            value: 'new-york',
+            label: 'New York'
+        },
+        {
+            value: 'san-francisco',
+            label: 'San Francisco'
+        }
+    ];
+
+    return (
+
+        <Card
+            {...rest}
+            className={clsx(classes.root, className)}
+        >
+            <form
+                autoComplete="off"
+                noValidate
+            >
+                <CardHeader
+                    subheader="The information can be edited"
+                    title="Profile"
+                />
+                <Divider/>
+                <CardContent>
                     <Grid
                         container
                         spacing={3}
                     >
-                      <Grid
-                          item
-                          md={6}
-                          xs={12}
-                      >
-                        <TextField
-                            fullWidth
-                            helperText="Please specify the first name"
-                            label="First name"
-                            margin="dense"
-                            name="firstName"
-                            onChange={handleChange}
-                            required
-                            value={values.firstName}
-                            variant="outlined"
-                        />
-                      </Grid>
-                      <Grid
-                          item
-                          md={6}
-                          xs={12}
-                      >
-                        <TextField
-                            fullWidth
-                            label="Last name"
-                            margin="dense"
-                            name="lastName"
-                            onChange={handleChange}
-                            required
-                            value={values.lastName}
-                            variant="outlined"
-                        />
-                      </Grid>
-                      <Grid
-                          item
-                          md={6}
-                          xs={12}
-                      >
-                        <TextField
-                            fullWidth
-                            label="Email Address"
-                            margin="dense"
-                            name="email"
-                            onChange={handleChange}
-                            required
-                            value={values.email}
-                            variant="outlined"
-                        />
-                      </Grid>
-                      <Grid
-                          item
-                          md={6}
-                          xs={12}
-                      >
-                        <TextField
-                            fullWidth
-                            label="Phone Number"
-                            margin="dense"
-                            name="phone"
-                            onChange={handleChange}
-                            type="number"
-                            value={values.phone}
-                            variant="outlined"
-                        />
-                      </Grid>
-                      <Grid
-                          item
-                          md={6}
-                          xs={12}
-                      >
-                        <TextField
-                            fullWidth
-                            label="Select State"
-                            margin="dense"
-                            name="state"
-                            onChange={handleChange}
-                            required
-                            select
-                            // eslint-disable-next-line react/jsx-sort-props
-                            SelectProps={{native: true}}
-                            value={values.state}
-                            variant="outlined"
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
                         >
-                          {states.map(option => (
-                              <option
-                                  key={option.value}
-                                  value={option.value}
-                              >
-                                {option.label}
-                              </option>
-                          ))}
-                        </TextField>
-                      </Grid>
-                      <Grid
-                          item
-                          md={6}
-                          xs={12}
-                      >
-                        <TextField
-                            fullWidth
-                            label="Country"
-                            margin="dense"
-                            name="country"
-                            onChange={handleChange}
-                            required
-                            value={values.country}
-                            variant="outlined"
-                        />
-                      </Grid>
+                            <TextField
+                                fullWidth
+                                helperText="Please specify the first name"
+                                label="First name"
+                                margin="dense"
+                                name="firstName"
+                                onChange={handleChange}
+                                required
+                                value={values.firstName}
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Last name"
+                                margin="dense"
+                                name="lastName"
+                                onChange={handleChange}
+                                required
+                                value={values.lastName}
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Email Address"
+                                margin="dense"
+                                name="email"
+                                onChange={handleChange}
+                                required
+                                value={values.email}
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Phone Number"
+                                margin="dense"
+                                name="phone"
+                                onChange={handleChange}
+                                type="number"
+                                value={values.phone}
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Select State"
+                                margin="dense"
+                                name="state"
+                                onChange={handleChange}
+                                required
+                                select
+                                // eslint-disable-next-line react/jsx-sort-props
+                                SelectProps={{native: true}}
+                                value={values.state}
+                                variant="outlined"
+                            >
+                                {states.map(option => (
+                                    <option
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </TextField>
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Country"
+                                margin="dense"
+                                name="country"
+                                onChange={handleChange}
+                                required
+                                value={values.country}
+                                variant="outlined"
+                            />
+                        </Grid>
                     </Grid>
-                  </CardContent>
-                  <Divider/>
+                </CardContent>
+                <Divider/>
 
-                  <CardActions>
+                <CardActions>
                     <Button
                         color="primary"
                         variant="contained"
                         onClick={handleUpdataProfiles}
                     >
-                      Save details
+                        Save details
 
                     </Button>
-                  </CardActions>
-                </form>
-              </Card>
-          );
-
-  }
-
-}
+                </CardActions>
+            </form>
+        </Card>
+    );
+};
 
 AccountDetails.propTypes = {
-  className: PropTypes.string
+    className: PropTypes.string
 };
 
 export default AccountDetails;

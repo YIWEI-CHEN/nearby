@@ -59,7 +59,7 @@ const AccountProfile = props => {
               gutterBottom
               variant="h2"
             >
-              Angel Christina
+              Ang Christina
             </Typography>
             <Typography
               className={classes.locationText}

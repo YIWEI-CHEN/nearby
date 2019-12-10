@@ -52,8 +52,11 @@ function AppAppBar(props) {
             href="/"
           >
             {'nearby'}
+
+
           </Link>
           <div className={classes.right}>
+
             <RouterLink
               color="inherit"
               variant="h6"
@@ -63,6 +66,8 @@ function AppAppBar(props) {
             >
               {'Sign In'}
             </RouterLink>
+
+
             <RouterLink
               variant="h6"
               underline="none"
@@ -71,6 +76,8 @@ function AppAppBar(props) {
             >
               {'Sign Up'}
             </RouterLink>
+
+
           </div>
         </Toolbar>
       </AppBar>
