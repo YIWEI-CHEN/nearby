@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from carecases.serializers import CareInfoSerializer
+from carecases.serializers import CareInfoSerializer, CareCaseSerializer
 from .models import ProvidedCareService, Language, Address, GeneralProfile
 
 UserModel = get_user_model()
@@ -38,8 +38,10 @@ class UserDetailSerializer(serializers.ModelSerializer):
     language_set = LanguageSerializer(many=True)
     providedcareservice_set = ProvidedServiceSerializer(many=True)
     generalprofile = GeneralProfileSerializer()
+    taker_cases = CareCaseSerializer(many=True)
+    provider_cases = CareCaseSerializer(many=True)
 
     class Meta:
         model = UserModel
         fields = ('pk', 'first_name', 'last_name', 'language_set', 'generalprofile',
-                  'providedcareservice_set')
+                  'providedcareservice_set', 'provider_cases', 'taker_cases')

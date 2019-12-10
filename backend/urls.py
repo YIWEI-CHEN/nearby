@@ -53,7 +53,9 @@ urlpatterns = [
     path("db/", db, name="db"),
     path(r'accounts/',include('allauth.urls')),
     path(r'rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
-    path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login')
+    path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
+
+    path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
 
 
 ]
