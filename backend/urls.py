@@ -25,12 +25,15 @@ from django.urls import path, include
 from rest_framework import routers
 from todo import views as todo_views
 from carecases import views as care_case_views
+from profiles import views as profile_views
+
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
 
 router = routers.DefaultRouter()
 router.register(r'todos', todo_views.TodoView, 'todo')
 router.register('cares', care_case_views.CareCaseView, 'care')
+router.register('users', profile_views.UserDetailView, 'user')
 
 urlpatterns = [
     # path('', index, name='index'),
