@@ -35,15 +35,44 @@ const ProviderList = props => {
   const [reserved, setReserved] = useState(false);
 
   useEffect(() => {
-    // axios
-    //   .get(
-    //     "/care/providers/"
-    //   )
-    //   .then(({ data }) => {
-    //     this.setProviders({ providers: data });
-    //   });
+    axios
+      .get(
+        '/api/users/0/reserve/'
+      )
+      .then(({ data }) => {
+        setReserved(data.reserved);
+      });
+    axios
+      .get(
+        '/api/providers/'
+      )
+      .then(({ data }) => {
+        const mapping = {
+          'en': 'English',
+          'es': 'Spanish',
+          'zh': 'Chinese',
+        };
+        const providers = data.map(d => {
+          return {
+            id: d.pk,
+            name: d.first_name + ' ' + d.last_name,
+            imageUrl: d.generalprofile.image_url,
+            rate: d.generalprofile.rate,
+            numberOfComments: d.generalprofile.num_of_comments,
+            languages: d.language_set.map(l => mapping[l.language]),
+            providedServices: d.providedcareservice_set.map(s => {
+                  return {
+                    label: s.care.name,
+                    price: s.care.price,
+                  }}),
+          };
+        });
+        // console.log(data[0]);
+        // console.log(providers);
+        setProviders(providers);
+      });
   }, []);
-  if (role === "provider" || reserved === true) {
+  if (reserved === true) {
     return (
         <CareCase />
     );
@@ -69,15 +98,15 @@ const ProviderList = props => {
           ))}
         </Grid>
       </div>
-      <div className={classes.pagination}>
-        <Typography variant="caption">1-6 of 20</Typography>
-        <IconButton>
-          <ChevronLeftIcon />
-        </IconButton>
-        <IconButton>
-          <ChevronRightIcon />
-        </IconButton>
-      </div>
+      {/*<div className={classes.pagination}>*/}
+        {/*<Typography variant="caption">1-6 of 20</Typography>*/}
+        {/*<IconButton>*/}
+          {/*<ChevronLeftIcon />*/}
+        {/*</IconButton>*/}
+        {/*<IconButton>*/}
+          {/*<ChevronRightIcon />*/}
+        {/*</IconButton>*/}
+      {/*</div>*/}
     </div>
   );
 };
