@@ -21,14 +21,16 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path, include                 # add this
-from rest_framework import routers                    # add this
-from todo import views as todo_views                  # add this
+from django.urls import path, include
+from rest_framework import routers
+from todo import views as todo_views
+from carecases import views as care_case_views
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
 
-router = routers.DefaultRouter()                      # add this
-router.register(r'todos', todo_views.TodoView, 'todo')     # add this
+router = routers.DefaultRouter()
+router.register(r'todos', todo_views.TodoView, 'todo')
+router.register('cares', care_case_views.CareCaseView, 'care')
 
 urlpatterns = [
     # path('', index, name='index'),

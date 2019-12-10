@@ -24,11 +24,10 @@ class ChoiceEnum(Enum):
 
 class CaseStatus(ChoiceEnum):
     INIT = 0
-    DECISION = 1  # wait for provider decision
-    ACCEPT = 2  # provider accept
-    DECLINE = 3  # provider decline
-    DOING = 4
-    DONE = 5
+    ACCEPT = 1  # provider accept
+    DECLINE = 2  # provider decline
+    DOING = 3
+    DONE = 4
 
 
 class CareCase(models.Model):
@@ -37,12 +36,12 @@ class CareCase(models.Model):
     provider = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        related_name=_('provider'),
+        related_name=_('provider_cases'),
     )
     taker = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        related_name=_('taker'),
+        related_name=_('taker_cases'),
     )
     provider_feedback = models.TextField(_('provider feedback'), blank=True, null=True)
     taker_feedback = models.TextField(_('taker feedback'), blank=True, null=True)
@@ -55,7 +54,7 @@ class CareService(models.Model):
     name = models.CharField(_('care service name'), max_length=30)
     price = models.IntegerField(_('price'))
     checked = models.BooleanField(_('checked'), default=False, blank=True)
-    case = models.ForeignKey(CareCase, on_delete=models.CASCADE)
+    case = models.ForeignKey(CareCase, on_delete=models.CASCADE, related_name='services')
 
     def __str__(self):
         return '{} costs {}'.format(self.name, self.price)
