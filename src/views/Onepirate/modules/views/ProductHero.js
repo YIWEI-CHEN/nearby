@@ -16,7 +16,7 @@ const CustomRouterLink = forwardRef((props, ref) => (
 ));
 
 const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+'https://revcycleintelligence.com/images/site/features/2018-11-29_Healthcare_workforce_managment.jpg';
 
 const styles = theme => ({
   background: {
@@ -47,10 +47,10 @@ function ProductHero(props) {
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+        NearBy
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        We are nearby to help
       </Typography>
       <Button
         color="secondary"
@@ -60,10 +60,10 @@ function ProductHero(props) {
         component={CustomRouterLink}
         to="/sign-up"
       >
-        Register
+        READ MORE
       </Button>
       <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
+        Experience the professionalism . Discover the convenience
       </Typography>
     </ProductHeroLayout>
   );

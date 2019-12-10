@@ -87,58 +87,59 @@ function ProductCategories(props) {
   const { classes } = props;
 
   const images = [
+    // {
+    //   url:
+    //     // 'https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=400&q=80',
+    //     'https://www.scripps.org/sparkle-assets/images/pregnant_woman_talking_to_doctor_1200x750-9629703634969243640.jpg',
+    //   title: 'Pregnancy',
+    //   width: '40%',
+    // },
+    // {
+    //   url:
+    //     'https://www.europeanlung.org/assets/components/phpthumbof/cache/paediatric_lung_disease.be9262e603ff996f5f4508dd341d0f93.jpg',
+    //   title: 'Pulmonary',
+    //   width: '20%',
+    // },
+    // {
+    //   url:
+    //     'https://www.inquirer.com/resizer/T9LmxKaHkIugN8uw5TTq7aOVRWo=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/HUMMNMXKZVFJTNGOMSC266XBBY.jpg',
+    //   title: 'Hypertension',
+    //   width: '40%',
+    // },
     {
       url:
-        'https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=400&q=80',
-      title: 'Snorkeling',
-      width: '40%',
-    },
-    {
-      url:
-        'https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80',
-      title: 'Massage',
-      width: '20%',
-    },
-    {
-      url:
-        'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=400&q=80',
-      title: 'Hiking',
-      width: '40%',
-    },
-    {
-      url:
-        'https://images.unsplash.com/photo-1453747063559-36695c8771bd?auto=format&fit=crop&w=400&q=80',
-      title: 'Tour',
+        'https://npuh82iut7x3aosxba3ol14m-wpengine.netdna-ssl.com/wp-content/uploads/2017/01/patient-education-min.jpg',
+      title: 'Education',
       width: '38%',
     },
     {
       url:
-        'https://images.unsplash.com/photo-1523309996740-d5315f9cc28b?auto=format&fit=crop&w=400&q=80',
-      title: 'Gastronomy',
+        'https://s3.envato.com/files/247897705/Star_Luc_Spring_017.jpg',
+      title: 'For disabled',
       width: '38%',
     },
     {
       url:
-        'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80',
-      title: 'Shopping',
+        'https://www.cancercenter.com/-/media/ctca/images/others/blogs/2017/09-september/03-blog-nutrition-l.jpg',
+      title: 'Nutrition',
       width: '24%',
     },
     {
       url:
-        'https://images.unsplash.com/photo-1506941433945-99a2aa4bd50a?auto=format&fit=crop&w=400&q=80',
-      title: 'Walking',
+        'https://s3.amazonaws.com/utep-uploads/wp-content/uploads/DUQ-MIG/2019/07/01110253/bsn-nurse-giving-shot-to-child.jpg',
+      title: 'Vaccinations',
       width: '40%',
     },
     {
       url:
-        'https://images.unsplash.com/photo-1533727937480-da3a97967e95?auto=format&fit=crop&w=400&q=80',
-      title: 'Fitness',
+        'https://assets.newatlas.com/dims4/default/36d2c3c/2147483647/strip/true/crop/1617x1079+0+1/resize/1160x774!/quality/90/?url=https%3A%2F%2Fassets.newatlas.com%2Farchive%2Fshutterstock_250798129_ogVok1j.jpg',
+      title: 'Oversight',
       width: '20%',
     },
     {
       url:
-        'https://images.unsplash.com/photo-1518136247453-74e7b5265980?auto=format&fit=crop&w=400&q=80',
-      title: 'Reading',
+        'https://www.inquirer.com/resizer/T9LmxKaHkIugN8uw5TTq7aOVRWo=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/HUMMNMXKZVFJTNGOMSC266XBBY.jpg',
+      title: 'Routines',
       width: '40%',
     },
   ];
@@ -146,7 +147,7 @@ function ProductCategories(props) {
   return (
     <Container className={classes.root} component="section">
       <Typography variant="h4" marked="center" align="center" component="h2">
-        For all tastes and all desires
+        For all needs, we are nearby to help
       </Typography>
       <div className={classes.images}>
         {images.map(image => (
