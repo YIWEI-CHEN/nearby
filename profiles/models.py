@@ -1,3 +1,5 @@
+import random
+
 from creditcards.models import CardNumberField, CardExpiryField, SecurityCodeField
 from django.contrib.auth.models import User
 from django.db import models
@@ -25,6 +27,12 @@ class GeneralProfile(models.Model):
 
     is_taker = models.BooleanField(_('taker status'), default=False)
     is_provider = models.BooleanField(_('provider status'), default=False)
+
+    rate = models.FloatField(_('average rate'), default=2.5, blank=True)
+    num_of_comments = models.IntegerField(_('number of comments'), default=100, blank=True)
+    image_url = models.TextField(_('image url'),
+                              default='/static/images/avatars/avatar_5.png',
+                              blank=True)
 
     def __str__(self):
         return "{}'s general profile".format(self.user.username)
