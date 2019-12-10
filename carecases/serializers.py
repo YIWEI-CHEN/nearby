@@ -1,12 +1,20 @@
 from rest_framework import serializers
 
-from .models import CareCase, CareService
+from .models import CareCase, CareService, CareInfo
+
+
+class CareInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CareInfo
+        fields = ['name', 'price']
 
 
 class CareServiceSerializer(serializers.ModelSerializer):
+    care = CareInfoSerializer()
+
     class Meta:
         model = CareService
-        fields = ['id', 'name', 'price', 'checked']
+        fields = ['id', 'care', 'checked']
 
 
 class CareCaseSerializer(serializers.ModelSerializer):

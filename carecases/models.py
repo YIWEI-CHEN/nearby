@@ -50,11 +50,18 @@ class CareCase(models.Model):
     # video = models.FileField(_('video'), upload_to='/static/videos', null=True)
 
 
-class CareService(models.Model):
-    name = models.CharField(_('care service name'), max_length=30)
-    price = models.IntegerField(_('price'))
-    checked = models.BooleanField(_('checked'), default=False, blank=True)
-    case = models.ForeignKey(CareCase, on_delete=models.CASCADE, related_name='services')
+class CareInfo(models.Model):
+    name = models.CharField(_('care name'), max_length=30)
+    price = models.IntegerField(_('price'), default=1)
 
     def __str__(self):
-        return '{} costs {}'.format(self.name, self.price)
+        return '{} (${})'.format(self.name, self.price)
+
+
+class CareService(models.Model):
+    checked = models.BooleanField(_('checked'), default=False, blank=True)
+    case = models.ForeignKey(CareCase, on_delete=models.CASCADE, related_name='services')
+    care = models.ForeignKey(CareInfo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{} belong case {}'.format(self.care.name, self.case)
