@@ -25,15 +25,30 @@ from django.urls import path, include                 # add this
 from rest_framework import routers                    # add this
 from todo import views as todo_views                  # add this
 from .views import index
+from nearby.views import index, login, db, FacebookLogin, GoogleLogin
 
 router = routers.DefaultRouter()                      # add this
 router.register(r'todos', todo_views.TodoView, 'todo')     # add this
 
 urlpatterns = [
-    path('', index, name='index'),
+    # path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
     path('accounts/', include('allauth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls'))
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+
+
+
+    ## ahxt
+    path('redirect_to_account/', index),
+    path("", index, name="index"),
+    path("index", index, name="index"),
+    path("login/", login, name="login"),
+    path("db/", db, name="db"),
+    path(r'accounts/',include('allauth.urls')),
+    path(r'rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
+    path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login')
+
+
 ]

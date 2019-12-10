@@ -11,7 +11,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
 
+<<<<<<< HEAD
 const GOOGLE_API_KEY = 'AIzaSyAGWkTVfH4RA2sRbFN9dY489Q-T1At2Fqk';
+=======
+import { compose, withProps, withStateHandlers } from "recompose";
+const GOOGLE_API_KEY = 'Google-API-KEY';
+>>>>>>> bda28ca77bcc560d9c4279da85892c1d708de1d6
 const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;
 
 var data = mockData

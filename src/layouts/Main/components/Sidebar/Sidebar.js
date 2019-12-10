@@ -13,6 +13,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import LocationOn from "@material-ui/icons/LocationOn";
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
@@ -45,6 +46,11 @@ const Sidebar = props => {
   const classes = useStyles();
 
   const pages = [
+    {
+      title: 'Looking for Care',
+      href: '/care',
+      icon: <EmojiPeopleIcon />
+    },
     // {
     //   title: 'Dashboard',
     //   href: '/dashboard',
@@ -81,8 +87,8 @@ const Sidebar = props => {
       icon: <PeopleIcon />
     },
     {
-      title: 'Nursing Cases',
-      href: '/cases',
+      title: 'History',
+      href: '/history',
       icon: <EventIcon />
     },
     {

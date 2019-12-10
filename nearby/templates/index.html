@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container">
+{#    <a href="/" class="lang-logo">#}
+{#      <img src="{% static 'lang-logo.png'%}">#}
+{#    </a>#}
+    <h1>NearBy Medical Service for You</h1>
+    <p>NearBy: "Whoever needs, we are nearby to help.</p>
+    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-python"><span class="glyphicon glyphicon-flash"></span> Sign Up</a>
+    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/YIWEI-CHEN/nearby"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
+  </div>
+</div>
+<div class="container">
+  <div class="alert alert-info text-left" role="alert">
+      <h5><span class="glyphicon glyphicon-info-sign align-right"></span> News:</h5>
+      <li>Congratulation! Kaixiong won the Best Paper Award of WWW2020.</li>
+      <li>Congratulation! Kaixiong won the Best Paper Award of SDM2020.</li>
+  </div>
+  <hr>
+    
+  <div class="row">
+    <div class="col-md-6">
+      <h3><span class="glyphicon glyphicon-info-sign"></span> CSCE606 Project</h3>
+      <ul>
+           <li>Project Name: NearBy.</li>
+           <li>Project Member: Sicheng Wang, Yi-Wei Chen, Kwei-Herng Lai, Ting-Hsiang Wang, Xiaotian Han, Kaixiong Zhou.</li>
+           <li>Project Customer:Chien-Ping Chen. </li>
+          <li>Project Github:<a href="https://github.com/YIWEI-CHEN/nearby">https://github.com/YIWEI-CHEN/nearby</a> . </li>
+
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h3><span class="glyphicon glyphicon-link"></span>Project Introdution</h3>
+      <ul>
+        <li>With increasing demand in senior care, we aim to develop a platform offering peer-to-peer in-home care service.</li>
+        <li>Our system will be able to match care-seeker and provider according to their locations and preferences. </li>
+        <ul>
+          <li>For example, the care provider can specify the preferred location and time,and the care taker can narrow down the services they want and indicate the desired details about the care provider.</li>
+          <li> The care providers are trained practitioners who are willing to earn some money by providing professional care services in their spare time.</li>
+        </ul>
+      </ul>
+    </div>
+
+</div>
+{% endblock %}
