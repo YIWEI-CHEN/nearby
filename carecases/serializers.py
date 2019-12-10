@@ -32,5 +32,7 @@ class CareCaseSerializer(serializers.ModelSerializer):
         services_data = validated_data.pop('services')
         case = CareCase.objects.create(**validated_data)
         for service_data in services_data:
-            CareService.objects.create(case=case, **service_data)
+            care_info = service_data.pop('care')
+            care = CareInfo.objects.filter(name=care_info['name'])[0]
+            CareService.objects.create(case=case, care=care, **service_data)
         return case
