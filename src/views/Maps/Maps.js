@@ -1,6 +1,10 @@
-import React, { Component }  from 'react';
+import React, { Component, useState }  from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import mockData from './data';
+import mockData2 from './data2';
+import { withStyles, makeStyles } from '@material-ui/styles';
+import { ProviderCard } from '../ProviderList/components';
+import { IconButton, Grid, Typography } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -9,17 +13,18 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-
-
-<<<<<<< HEAD
+ 
 const GOOGLE_API_KEY = 'AIzaSyAGWkTVfH4RA2sRbFN9dY489Q-T1At2Fqk';
-=======
-import { compose, withProps, withStateHandlers } from "recompose";
-const GOOGLE_API_KEY = 'Google-API-KEY';
->>>>>>> bda28ca77bcc560d9c4279da85892c1d708de1d6
 const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;
 
 var data = mockData
+const providers = mockData2;
+//const [providers] = useState(mockData);
+
+const useStyles = makeStyles(theme => ({
+  root: {
+  },
+}));
 
 class Canvas extends Component {
   state = {
@@ -34,7 +39,7 @@ class Canvas extends Component {
       checked_Spn: false,
       checked_Chn: false,
       checked_Kor: false,
-    };
+  };
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
@@ -69,10 +74,9 @@ class Canvas extends Component {
       }
     }
   };
-
   render() {
-    var langs = []
-    console.log(this.state);
+    var langs = [];
+    //const {classes} = useStyles();
     if (!this.props.loaded) return <div>Loading...</div>;
     return (
       <Map
@@ -142,6 +146,17 @@ class Canvas extends Component {
           marker={this.state.activeMarker}
           onClose={this.onInfoWindowClose}
           visible={this.state.showingInfoWindow}>
+          {providers.map(provider => (
+            <Grid
+              item
+              key={provider.id}
+              lg={4}
+              md={6}
+              xs={12}
+            >
+              <ProviderCard provider={provider} />
+            </Grid>
+          ))}
           <div>
             <h2 align='center'>{this.state.selectedPlace.name}</h2>
             <li>Language: {this.state.selectedPlace.language}</li>
