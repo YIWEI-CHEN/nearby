@@ -40,21 +40,39 @@ const useStyles = makeStyles(() => ({
 
 const AccountDetails = props => {
 
+  console.log( this.props )
+
   const { className, ...rest } = props;
 
+  console.log( className, rest )
+
   const classes = useStyles();
-  // read_profiles();
 
-  var data;
-  async function read_profiles()  {
-      return  await axios.get("/read_profiles/")
-  }
-  data = read_profiles();
-  // data= data.PromiseValue
-  console.log(data);
-  console.log(data.__proto__);
 
-  console.log(data.Promise);
+
+  // // read_profiles();
+  //
+  // var data, data2;
+  // async function read_profiles()  {
+  //     return  await axios.get("/read_profiles/")
+  // }
+  // data = read_profiles();
+  // // data= data.PromiseValue
+  //
+  // data.then(function (result) {
+  //   data2 = result
+  //
+  //   // console.log( data2 )
+  // }
+  // )
+
+
+ // console.log(this.props.show)
+  // console.log(data);
+  // console.log(data2);
+  // console.log(data.__proto__);
+  // console.log(data.PromiseStatus);
+  // console.log(data.PromiseValue);
 
 
   const [values, setValues] = useState({
@@ -110,6 +128,7 @@ const AccountDetails = props => {
   ];
 
   return (
+
     <Card
       {...rest}
       className={clsx(classes.root, className)}

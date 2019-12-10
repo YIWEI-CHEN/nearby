@@ -9,6 +9,3 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 
 serviceWorker.unregister();
-
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
-axios.defaults.xsrfCookieName = "csrftoken"

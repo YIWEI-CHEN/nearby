@@ -41,6 +41,8 @@ const videoJsOptions = {
         }
     }
 };
+
+
 const browserHistory = createBrowserHistory();
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
@@ -53,27 +55,37 @@ validate.validators = {
 };
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     viewCompleted: false,
-  //     activeItem: {
-  //       title: "",
-  //       description: "",
-  //       completed: false
-  //     },
-  //     todoList: []
-  //   };
-  // }
-  // componentDidMount() {
-  //   this.refreshList();
-  // }
-  // refreshList = () => {
-  //   axios
-  //     .get("/api/todos/")
-  //     .then(res => this.setState({ todoList: res.data }))
-  //     .catch(err => console.log(err));
-  // };
+
+constructor(props){
+    super(props);
+    this.state={
+      users:[],
+      isLoaded:false
+    }
+  }
+
+  componentDidMount() {
+    const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
+    axios.get('/read_profiles/')
+    .then(function (response) {
+      _this.setState({
+        users:response,
+        isLoaded:true
+      });
+
+        console.log( _this.state )
+    })
+    .catch(function (error) {
+      console.log(error);
+      _this.setState({
+        isLoaded:false,
+        error:error
+      })
+    })
+  }
+
+
+
   // displayCompleted = status => {
   //   if (status) {
   //     return this.setState({ viewCompleted: true });
@@ -163,6 +175,7 @@ class App extends Component {
   // };
   render() {
     return (
+
       // <main className="content">
         // <h1 className="text-white text-uppercase text-center my-4">Check-in app</h1>
         // <VideojsRecordPlayer { ...videoJsOptions } />
@@ -194,6 +207,8 @@ class App extends Component {
           <Routes />
         </Router>
       </ThemeProvider>
+
+
     );
   }
 }
