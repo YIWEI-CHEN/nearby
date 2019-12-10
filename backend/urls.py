@@ -21,7 +21,7 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 from todo import views as todo_views
 from carecases import views as care_case_views
@@ -34,6 +34,7 @@ router = routers.DefaultRouter()
 router.register(r'todos', todo_views.TodoView, 'todo')
 router.register('cares', care_case_views.CareCaseView, 'care')
 router.register('users', profile_views.UserDetailView, 'user')
+# router.register('providers', profile_views.ProviderListView, 'provider')
 
 urlpatterns = [
     # path('', index, name='index'),
@@ -56,6 +57,6 @@ urlpatterns = [
     path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
 
     path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
-
+    path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list')
 
 ]

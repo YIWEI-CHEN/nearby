@@ -45,3 +45,14 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ('pk', 'first_name', 'last_name', 'language_set', 'generalprofile',
                   'providedcareservice_set', 'provider_cases', 'taker_cases')
+
+
+class ProviderDetailSerializer(serializers.ModelSerializer):
+    language_set = LanguageSerializer(many=True)
+    providedcareservice_set = ProvidedServiceSerializer(many=True)
+    generalprofile = GeneralProfileSerializer()
+
+    class Meta:
+        model = UserModel
+        fields = ('pk', 'first_name', 'last_name', 'language_set', 'generalprofile',
+                  'providedcareservice_set')
