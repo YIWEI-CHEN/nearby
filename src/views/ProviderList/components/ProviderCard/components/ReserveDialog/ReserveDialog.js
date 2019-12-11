@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReserveDialog = props =>  {
-  const { onClose, open, isReserved, provider, history } = props;
+  const { onClose, open, isReserved, provider, history, user } = props;
   const classes = useStyles();
   const [checked, setChecked] = React.useState([1]);
 
@@ -49,6 +49,7 @@ const ReserveDialog = props =>  {
   };
 
   const handleReserve = () => {
+    isReserved(true);
     const newChecked = [...checked];
     newChecked.shift();
 
@@ -63,7 +64,7 @@ const ReserveDialog = props =>  {
         time: formState.values.time || defaultTime,
         note: formState.values.note,
         provider: provider.id,
-        taker: 1,
+        taker: user.user,
         services: services,
       })
       .then(function (response) {
@@ -72,8 +73,9 @@ const ReserveDialog = props =>  {
           history.push('/care');
       })
       .catch(function (error) {
-          alert(error);
-          // console.log(error);
+          // alert(error);
+          console.log(error);
+          history.push('/care');
       });
   };
 
@@ -196,7 +198,8 @@ ReserveDialog.propTypes = {
   isReserved: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   provider: PropTypes.object.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default ReserveDialog;

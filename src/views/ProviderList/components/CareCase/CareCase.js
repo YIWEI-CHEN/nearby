@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
@@ -18,6 +18,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import CardMedia from '@material-ui/core/CardMedia';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -60,31 +61,91 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const statusMapping = {
+  0: 'Send Request',
+  1: 'Accept Your Request',
+  2: 'Decline Your Request',
+  3: 'Serving Your Request',
+  4: 'Finish Your Request',
+};
+
 const CareCase = props => {
-  const { className, ...rest } = props;
+  const { className, user, ...rest } = props;
 
   const classes = useStyles();
 
   const [caseInfo, setCaseInfo] = useState({
-    type: 'taker',
-    name: 'Emilee Simchenko',
-    imageUrl: '/static/images/avatars/avatar_8.png',
+    type: user.is_taker? "taker": "provider",
+    name: 'No Cases',
+    imageUrl: '/static/images/not_found.png',
     providedServices: [
-      { label: 'Shower', price: '1', checked: true },
-      { label: 'Blood Pressure Measurement', price: '1', checked: false },
-      { label: 'Medicine Feeding', price: '1', checked: true },
-      { label: 'Upper Limbs Moving', price: '1', checked: true },
-      { label: 'Turn Body Over', price: '1', checked: false },
+      // { label: 'Shower', price: '1', checked: true },
+      // { label: 'Blood Pressure Measurement', price: '1', checked: false },
+      // { label: 'Medicine Feeding', price: '1', checked: true },
+      // { label: 'Upper Limbs Moving', price: '1', checked: true },
+      // { label: 'Turn Body Over', price: '1', checked: false },
     ],
     languages: [
-      'English',
-      'Chinese',
-      'Spanish'
+      // 'English',
+      // 'Chinese',
+      // 'Spanish'
     ],
-    note: 'Left shoulder had surgery.',
+    note: '',
     serviceTime: "2019-11-24T22:30",
     status: 'Sent Reservation'
   });
+
+  useEffect(() => {
+    let case_info = {};
+    axios
+      .get(
+          '/api/users/' + user.user + '/'
+      )
+      .then(({data}) => {
+        const cases = user.is_taker? data.taker_cases: data.provider_cases;
+        const latest_case = cases.pop();
+        console.log(latest_case);
+        const show_user = user.is_taker? latest_case.provider: latest_case.taker;
+        case_info = {
+          type: user.is_taker? "taker": "provider",
+          id: latest_case.id,
+          status: statusMapping[latest_case.status],
+          note: latest_case.note,
+          serviceTime: latest_case.time,
+          providedServices: latest_case.services.map(s => {
+            return {
+              label: s.care.name,
+              price: s.care.price,
+              checked: s.checked,
+            };
+          })
+        };
+        return axios.get('/api/users/'+ show_user + '/');
+      })
+      .then(({data}) => {
+        // console.log(data);
+        const mapping = {
+          'en': 'English',
+          'es': 'Spanish',
+          'zh': 'Chinese',
+        };
+        if (data === null) {
+          setCaseInfo({});
+          return
+        }
+        case_info = {
+          ...case_info,
+          languages: data.language_set.map(l => mapping[l.language]),
+          name: data.generalprofile.firstName + ' ' + data.generalprofile.lastName,
+          imageUrl: data.generalprofile.image_url,
+        };
+        console.log(case_info);
+        setCaseInfo(case_info);
+      })
+        .catch(error => {
+          console.log(error);
+        });
+  }, []);
 
   return (
     <Grid
@@ -138,6 +199,7 @@ const CareCase = props => {
                     return (
                         <Chip
                             label={data}
+                            key={data}
                             className={classes.chip}
                             variant="outlined"
                             color="secondary"
@@ -159,7 +221,7 @@ const CareCase = props => {
                 className={classes.textField}
                 InputProps={{
                   readOnly: true,
-                  shrink: true,
+                  // shrink: true,
                 }}
               />
               <Divider className={classes.divider}/>
@@ -221,10 +283,16 @@ const CareCase = props => {
                 <div>
                   <Divider className={classes.divider}/>
                   <CardActions>
-                    <Button color="primary">
+                    <Button color="primary"
+                      disabled={caseInfo.name === "No Cases"}
+                    >
                       Decline
                     </Button>
-                    <Button color="primary" variant="contained">
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        disabled={caseInfo.name === "No Cases"}
+                    >
                      Accept
                     </Button>
                   </CardActions>
@@ -237,7 +305,8 @@ const CareCase = props => {
 };
 
 CareCase.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default CareCase;

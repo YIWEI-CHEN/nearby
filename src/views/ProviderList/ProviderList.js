@@ -31,15 +31,21 @@ const ProviderList = props => {
   const classes = useStyles();
 
   const [providers, setProviders] = useState(mockData);
-  const [role, setRole] = useState("taker");
+  const [user, setUser] = useState({});
   const [reserved, setReserved] = useState(false);
 
   useEffect(() => {
     axios
       .get(
-        '/api/users/1/reserve/'
+          '/read_profiles/'
       )
-      .then(({ data }) => {
+      .then(({data}) => {
+        const user_info = data.result[0].fields;
+        setUser(user_info);
+        const url = '/api/users/' + user_info.user + '/reserve/';
+        return axios.get(url);
+      })
+      .then(({data}) => {
         setReserved(data.reserved);
       });
     axios
@@ -55,7 +61,7 @@ const ProviderList = props => {
         const providers = data.map(d => {
           return {
             id: d.pk,
-            name: d.first_name + ' ' + d.last_name,
+            name: d.generalprofile.firstName + ' ' + d.generalprofile.lastName,
             imageUrl: d.generalprofile.image_url,
             rate: d.generalprofile.rate,
             numberOfComments: d.generalprofile.num_of_comments,
@@ -67,14 +73,12 @@ const ProviderList = props => {
                   }}),
           };
         });
-        // console.log(data[0]);
-        // console.log(providers);
         setProviders(providers);
       });
   }, []);
-  if (reserved === true) {
+  if (reserved === true || user.is_provider) {
     return (
-        <CareCase />
+        <CareCase user={user}/>
     );
   }
   return (
@@ -93,7 +97,7 @@ const ProviderList = props => {
               md={6}
               xs={12}
             >
-              <ProviderCard provider={provider} history={history} isReserved={setReserved}/>
+              <ProviderCard provider={provider} history={history} isReserved={setReserved} user={user}/>
             </Grid>
           ))}
         </Grid>

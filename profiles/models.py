@@ -29,7 +29,7 @@ class GeneralProfile(models.Model):
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default='F')
     date_of_birth = models.DateField(_('date of birth'), blank=True, null=True)
 
-    is_taker = models.BooleanField(_('taker status'), default=False)
+    is_taker = models.BooleanField(_('taker status'), default=True)
     is_provider = models.BooleanField(_('provider status'), default=False)
 
     rate = models.FloatField(_('average rate'), default=2.5, blank=True)
