@@ -118,6 +118,7 @@ const CareCase = props => {
         status: DONE,
       });
       console.log('Succeed to change status');
+      window.location.reload(false);
     });
   };
 
