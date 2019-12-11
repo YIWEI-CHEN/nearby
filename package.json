@@ -12,6 +12,8 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "clsx": "^1.0.4",
+    "google-map-react": "^1.1.5",
+    "google-maps-react": "^2.0.2",
     "history": "^4.9.0",
     "icons": "^1.0.0",
     "moment": "^2.24.0",

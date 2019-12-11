@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
-import { AccountProfile, AccountDetails } from './components';
+import { PaymentProfile, PaymentDetails } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Account = () => {
+const Payment = () => {
   const classes = useStyles();
 
   return (
@@ -26,11 +26,11 @@ const Account = () => {
           xl={8}
           xs={12}
         >
-          <AccountDetails />
+          <PaymentDetails />
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default Account;
+export default Payment;

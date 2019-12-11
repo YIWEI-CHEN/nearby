@@ -10,8 +10,8 @@ function Copyright() {
   return (
     <React.Fragment>
       {'© '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/YIWEI-CHEN/nearby">
+        DeepMining.
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -66,10 +66,10 @@ const LANGUAGES = [
     code: 'en-US',
     name: 'English',
   },
-  {
-    code: 'fr-FR',
-    name: 'Français',
-  },
+  // {
+  //   code: 'fr-FR',
+  //   name: 'Français',
+  // },
 ];
 
 export default function AppFooter() {
@@ -87,14 +87,14 @@ export default function AppFooter() {
               className={classes.iconsWrapper}
               spacing={2}
             >
-              <Grid item className={classes.icons}>
-                <a href="https://material-ui.com/" className={classes.icon}>
-                  <img src="/static/themes/onepirate/appFooterFacebook.png" alt="Facebook" />
-                </a>
-                <a href="https://twitter.com/MaterialUI" className={classes.icon}>
-                  <img src="/static/themes/onepirate/appFooterTwitter.png" alt="Twitter" />
-                </a>
-              </Grid>
+              {/*<Grid item className={classes.icons}>*/}
+                {/*<a href="https://material-ui.com/" className={classes.icon}>*/}
+                  {/*<img src="https://icon-library.net/images/fb-icon-small/fb-icon-small-1.jpg" alt="Facebook" />*/}
+                {/*</a>*/}
+                {/*<a href="https://twitter.com/MaterialUI" className={classes.icon}>*/}
+                  {/*<img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-twitter-512.png" alt="Twitter" />*/}
+                {/*</a>*/}
+              {/*</Grid>*/}
               <Grid item>
                 <Copyright />
               </Grid>
@@ -131,27 +131,27 @@ export default function AppFooter() {
               ))}
             </TextField>
           </Grid>
-          <Grid item>
-            <Typography variant="caption">
-              {'Icons made by '}
-              <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
-                Freepik
-              </Link>
-              {' from '}
-              <Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">
-                www.flaticon.com
-              </Link>
-              {' is licensed by '}
-              <Link
-                href="https://creativecommons.org/licenses/by/3.0/"
-                title="Creative Commons BY 3.0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CC 3.0 BY
-              </Link>
-            </Typography>
-          </Grid>
+          {/*<Grid item>*/}
+            {/*<Typography variant="caption">*/}
+              {/*{'Icons made by '}*/}
+              {/*<Link href="https://www.freepik.com" rel="sponsored" title="Freepik">*/}
+                {/*Freepik*/}
+              {/*</Link>*/}
+              {/*{' from '}*/}
+              {/*<Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">*/}
+                {/*www.flaticon.com*/}
+              {/*</Link>*/}
+              {/*{' is licensed by '}*/}
+              {/*<Link*/}
+                {/*href="https://creativecommons.org/licenses/by/3.0/"*/}
+                {/*title="Creative Commons BY 3.0"*/}
+                {/*target="_blank"*/}
+                {/*rel="noopener noreferrer"*/}
+              {/*>*/}
+                {/*CC 3.0 BY*/}
+              {/*</Link>*/}
+            {/*</Typography>*/}
+          {/*</Grid>*/}
         </Grid>
       </Container>
     </Typography>

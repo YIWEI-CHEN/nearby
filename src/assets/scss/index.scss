@@ -22,3 +22,8 @@ a {
 #root {
   height: 100%;
 }
+
+.gm-style-cc { display:none; }
+.gm-style a[href^="https://maps.google.com/maps"] {
+  display: none !important;
+}

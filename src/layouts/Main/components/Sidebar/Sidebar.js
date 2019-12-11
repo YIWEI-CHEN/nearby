@@ -14,6 +14,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import LocationOn from "@material-ui/icons/LocationOn";
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import PaymentIcon from '@material-ui/icons/Payment';
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
@@ -76,6 +77,13 @@ const Sidebar = props => {
       href: '/account',
       icon: <AccountBoxIcon />
     },
+
+      {
+      title: 'Payment',
+      href: '/payment',
+      icon: <PaymentIcon />
+    },
+
     {
       title: 'Settings',
       href: '/settings',

@@ -198,7 +198,6 @@ const SignIn = props => {
         window.location.href='/accounts/google/login/';
     };
 
-
     const hasError = field =>
         formState.touched[field] && formState.errors[field] ? true : false;
 
