@@ -41,7 +41,7 @@ function ProductSmokingHero(props) {
       <Typography variant="subtitle1" className={classes.link}>
         We are here to help. Get in touch!
       </Typography>
-      <img src="/static/themes/onepirate/producBuoy.svg" className={classes.buoy} alt="buoy" />
+      <img src="https://image.flaticon.com/icons/svg/1067/1067566.svg" className={classes.buoy} alt="buoy" />
     </Container>
   );
 }
