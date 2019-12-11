@@ -42,7 +42,7 @@ const AccountDetails = props => {
     const [values, setValues] = useState({
         firstName: 'None',
         lastName: 'None',
-        email: 'angel@tamu.edu',
+        email: 'None',
         phone: 'None',
         state: 'None',
         country: 'None'
@@ -91,25 +91,6 @@ const AccountDetails = props => {
                 console.log(error);
             });
     };
-
-    const states = [
-        // {
-        //   value: 'texas',
-        //   lable: 'Texas'
-        // },
-        {
-            value: 'alabama',
-            label: 'Alabama'
-        },
-        {
-            value: 'new-york',
-            label: 'New York'
-        },
-        {
-            value: 'san-francisco',
-            label: 'San Francisco'
-        }
-    ];
 
     return (
 
@@ -196,33 +177,21 @@ const AccountDetails = props => {
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
+                         <Grid
                             item
                             md={6}
                             xs={12}
                         >
                             <TextField
                                 fullWidth
-                                label="Select State"
+                                label="State"
                                 margin="dense"
                                 name="state"
                                 onChange={handleChange}
                                 required
-                                select
-                                // eslint-disable-next-line react/jsx-sort-props
-                                SelectProps={{native: true}}
                                 value={values.state}
                                 variant="outlined"
-                            >
-                                {states.map(option => (
-                                    <option
-                                        key={option.value}
-                                        value={option.value}
-                                    >
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </TextField>
+                            />
                         </Grid>
                         <Grid
                             item

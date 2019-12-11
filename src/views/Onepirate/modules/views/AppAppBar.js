@@ -67,7 +67,6 @@ function AppAppBar(props) {
               {'Sign In'}
             </RouterLink>
 
-
             <RouterLink
               variant="h6"
               underline="none"
