@@ -68,7 +68,7 @@ const ReserveDialog = props =>  {
         services: services,
       })
       .then(function (response) {
-          console.log(response);
+          console.log(response.data);
           isReserved(true);
           history.push('/care');
       })
