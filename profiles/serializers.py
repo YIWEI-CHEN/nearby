@@ -7,6 +7,12 @@ from .models import ProvidedCareService, Language, Address, GeneralProfile
 UserModel = get_user_model()
 
 
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GeneralProfile
+        fields = ('gender', 'date of birth', 'preferred language', 'phone number')
+
+
 class ProvidedServiceSerializer(serializers.ModelSerializer):
     care = CareInfoSerializer()
 

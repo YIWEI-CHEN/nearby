@@ -1,7 +1,12 @@
-from rest_framework.response import Response
-from rest_framework import viewsets
-from rest_framework import generics
+import json
 
+from django.core import serializers
+from django.http import HttpResponse
+from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework.response import Response
+
+from .models import GeneralProfile
 from profiles.serializers import UserDetailSerializer, UserModel, ProviderDetailSerializer
 
 
@@ -32,3 +37,41 @@ class ProviderListView(generics.ListAPIView):
             providers = providers.filter(language__language=language)
         return providers
 
+
+def update_profiles( request ):
+    print( "come in!!" )
+    data = json.loads( request.body )["values"]
+    data["user_id"] = request.user.id
+    data["user"]  = request.user
+    print( data )
+    GeneralProfile.objects.create( **data )
+    res = {
+        "success":True
+    }
+    return HttpResponse( json.dumps(res), content_type="application/json"  )
+
+
+
+def create_profiles( request ):
+    print( "come in!!" )
+    data = json.loads( request.body )["values"]
+    data["user_id"] = request.user.id
+    data["user"]  = request.user
+    print( data )
+    GeneralProfile.objects.create( **data )
+    res = {
+        "success":True
+    }
+    return HttpResponse( json.dumps(res), content_type="application/json"  )
+
+
+def read_profiles( request ):
+    print( "read_profiles!!" )
+    print( request.user.id )
+    print(request.user)
+    data = { "data":"test" }
+
+    a = GeneralProfile.objects.filter(user=request.user)
+    print( a )
+    data['result'] = json.loads(serializers.serialize("json", a))
+    return HttpResponse( json.dumps(data), content_type="application/json"  )
