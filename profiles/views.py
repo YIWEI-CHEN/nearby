@@ -6,6 +6,7 @@ from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.response import Response
 
+from carecases.models import CaseStatus
 from .models import GeneralProfile
 from profiles.serializers import UserDetailSerializer, UserModel, ProviderDetailSerializer
 
@@ -20,10 +21,17 @@ class IsReservedView(generics.GenericAPIView):
     queryset = UserModel.objects.all()
 
     def get(self, request, *args, **kwargs):
+        reserved = True
         instance = self.get_object()
-        num_of_taker_cases = len(instance.taker_cases.all())
+        taker_cases = instance.taker_cases.all()
+        if len(taker_cases) == 0:
+            reserved = False
+        else:
+            latest_one = taker_cases.order_by('-id')[0]
+            if latest_one.status == CaseStatus.DONE.value:
+                reserved = False
         is_taker = instance.generalprofile.is_taker
-        reserved = num_of_taker_cases > 0 and is_taker
+        reserved = reserved and is_taker
         return Response({"reserved": reserved})
 
 

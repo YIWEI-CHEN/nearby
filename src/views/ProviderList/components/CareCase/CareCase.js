@@ -139,7 +139,7 @@ const CareCase = props => {
           name: data.generalprofile.firstName + ' ' + data.generalprofile.lastName,
           imageUrl: data.generalprofile.image_url,
         };
-        console.log(case_info);
+        // console.log(case_info);
         setCaseInfo(case_info);
       })
         .catch(error => {
