@@ -25,7 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+oo!jpn85%7*l_-1lcni8adkf8l*pvlqwkx9f02tl941kjhdhb'
 
 CSRF_COOKIE_NAME = "csrftoken"
-LOGIN_REDIRECT_URL="/redirect_to_account"
+# LOGIN_REDIRECT_URL="/redirect_to_account"
+LOGIN_REDIRECT_URL="/create_profiles_for_google"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
