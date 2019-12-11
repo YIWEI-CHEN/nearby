@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AccountProfile = props => {
+const PaymentProfile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -104,8 +104,8 @@ const AccountProfile = props => {
   );
 };
 
-AccountProfile.propTypes = {
+PaymentProfile.propTypes = {
   className: PropTypes.string
 };
 
-export default AccountProfile;
+export default PaymentProfile;
