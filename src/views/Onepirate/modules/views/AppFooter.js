@@ -10,7 +10,7 @@ function Copyright() {
   return (
     <React.Fragment>
       {'© '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://github.com/YIWEI-CHEN/nearby">
         DeepMining.
       </Link>{' '}
       {new Date().getFullYear()}

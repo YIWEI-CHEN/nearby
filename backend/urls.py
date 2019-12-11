@@ -21,7 +21,7 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 from rest_framework import routers
 from todo import views as todo_views
 from carecases import views as care_case_views
@@ -29,6 +29,7 @@ from profiles import views as profile_views
 
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
+from profiles.views import update_profiles, read_profiles
 
 router = routers.DefaultRouter()
 router.register(r'todos', todo_views.TodoView, 'todo')
@@ -44,8 +45,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
-
-
     ## ahxt
     path('redirect_to_account/', index),
     path("", index, name="index"),
@@ -55,6 +54,9 @@ urlpatterns = [
     path(r'accounts/',include('allauth.urls')),
     path(r'rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
     path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
+
+    path('update_profiles/', update_profiles),
+    path('read_profiles/', read_profiles),
 
     path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
     path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list')
