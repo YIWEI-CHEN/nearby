@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/styles';
 import {Typography} from "@material-ui/core";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,9 +32,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReserveDialog = props =>  {
-  const { onClose, open, isReserved, provider, history } = props;
+  const { onClose, open, isReserved, provider, history, user } = props;
   const classes = useStyles();
   const [checked, setChecked] = React.useState([1]);
+
+  const [formState, setFormState] = useState({
+      isValid: false,
+      values: {},
+      touched: {},
+      errors: {}
+  });
+  const defaultTime = "2019-11-24T22:30";
 
   const handleClose = () => {
     onClose();
@@ -41,7 +50,33 @@ const ReserveDialog = props =>  {
 
   const handleReserve = () => {
     isReserved(true);
-    history.push('/care');
+    const newChecked = [...checked];
+    newChecked.shift();
+
+    const services = provider.providedServices.map(s => {
+        return {
+            care: {name: s.label},
+            checked: newChecked.includes(s.label)? true: false,
+        };
+    });
+    axios
+      .post("/api/cares/", {
+        time: formState.values.time || defaultTime,
+        note: formState.values.note,
+        provider: provider.id,
+        taker: user.user,
+        services: services,
+      })
+      .then(function (response) {
+          console.log(response.data);
+          isReserved(true);
+          history.push('/care');
+      })
+      .catch(function (error) {
+          // alert(error);
+          console.log(error);
+          history.push('/care');
+      });
   };
 
   const handleToggle = value => () => {
@@ -54,7 +89,32 @@ const ReserveDialog = props =>  {
       newChecked.splice(currentIndex, 1);
     }
 
+    if (newChecked.length > 1) {
+      formState.isValid = true;
+    } else {
+      formState.isValid = false;
+    }
+    setFormState(formState);
     setChecked(newChecked);
+  };
+
+  const handleChange = event => {
+      event.persist();
+
+      setFormState(formState => ({
+          ...formState,
+          values: {
+              ...formState.values,
+              [event.target.name]:
+                  event.target.type === 'checkbox'
+                      ? event.target.checked
+                      : event.target.value
+          },
+          touched: {
+              ...formState.touched,
+              [event.target.name]: true
+          }
+      }));
   };
 
   return (
@@ -65,57 +125,69 @@ const ReserveDialog = props =>  {
           <DialogContentText>
             Please select care services provided by {provider.name}. You can add important reminding in Note.
           </DialogContentText>
-          <TextField
-            id="datetime-local"
-            label="Reservation Time"
-            type="datetime-local"
-            defaultValue="2019-11-24T22:30"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <List dense className={classes.root}>
-            {provider.providedServices.map(value => {
-              const labelId = `checkbox-list-secondary-label-${value.label}`;
-              return (
-                <ListItem key={value.label} button>
-                  <ListItemText id={labelId} primary={`${value.label}`} />
-                  <Typography
-                    display="inline"
-                    variant="body2"
-                  >
-                    ${value.price}
-                  </Typography>
-                  <ListItemSecondaryAction>
-                    <Checkbox
-                      edge="end"
-                      onChange={handleToggle(value.label)}
-                      checked={checked.indexOf(value.label) !== -1}
-                      inputProps={{ 'aria-labelledby': labelId }}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-              );
-            })}
-           </List>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Note"
-            type="note"
-            fullWidth
-          />
+          <form
+              onSubmit={handleReserve}
+          >
+            <TextField
+              id="datetime-local"
+              label="Reservation Time"
+              type="datetime-local"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              name="time"
+              value={formState.values.time || defaultTime}
+              onChange={handleChange}
+            />
+            <List dense className={classes.root}>
+              {provider.providedServices.map(value => {
+                const labelId = `checkbox-list-secondary-label-${value.label}`;
+                return (
+                  <ListItem key={value.label} button>
+                    <ListItemText id={labelId} primary={`${value.label}`} />
+                    <Typography
+                      display="inline"
+                      variant="body2"
+                    >
+                      ${value.price}
+                    </Typography>
+                    <ListItemSecondaryAction>
+                      <Checkbox
+                        edge="end"
+                        onChange={handleToggle(value.label)}
+                        checked={checked.indexOf(value.label) !== -1}
+                        inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+              })}
+             </List>
+            <TextField
+              className={classes.textField}
+              autoFocus
+              margin="dense"
+              fullWidth
+              id="note"
+              label="Note"
+              name="note"
+              onChange={handleChange}
+              type="text"
+              value={formState.values.note || ''}
+              variant="outlined"
+            />
+            <Button
+                color="primary"
+                variant="contained"
+                disabled={!formState.isValid}
+                fullWidth
+                type="submit"
+            >
+              Reserve
+            </Button>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleReserve} color="primary" variant="contained">
-            Reserve
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
@@ -126,7 +198,8 @@ ReserveDialog.propTypes = {
   isReserved: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   provider: PropTypes.object.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default ReserveDialog;

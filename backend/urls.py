@@ -21,7 +21,7 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 from todo import views as todo_views
 from carecases import views as care_case_views
@@ -29,7 +29,7 @@ from profiles import views as profile_views
 
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
-from profiles.views import update_profiles, read_profiles
+from profiles.views import update_profiles, read_profiles, create_profiles, create_profiles_for_google
 
 router = routers.DefaultRouter()
 router.register(r'todos', todo_views.TodoView, 'todo')
@@ -39,6 +39,7 @@ router.register('users', profile_views.UserDetailView, 'user')
 
 urlpatterns = [
     # path('', index, name='index'),
+    re_path(r'^$', index),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
@@ -56,9 +57,14 @@ urlpatterns = [
     path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
 
     path('update_profiles/', update_profiles),
+    path('create_profiles/', create_profiles),
+    path('create_profiles_for_google/', create_profiles_for_google),
+
+
     path('read_profiles/', read_profiles),
 
     path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
-    path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list')
+    path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list'),
+    re_path(r'^(?:.*)/?$', index)
 
 ]

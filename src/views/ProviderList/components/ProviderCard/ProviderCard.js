@@ -48,14 +48,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProviderCard = props => {
-  const { className, provider, history, isReserved, ...rest } = props;
+  const { className, provider, history, isReserved, user, ...rest } = props;
 
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    console.log("Open Dialogue");
+    // console.log("Open Dialogue");
     setOpen(true);
   };
 
@@ -91,6 +91,7 @@ const ProviderCard = props => {
           return (
             <Chip
               label={data}
+              key={data}
               className={classes.chip}
               variant="outlined"
               color="secondary"
@@ -109,6 +110,7 @@ const ProviderCard = props => {
           return (
             <Chip
               label={data.label}
+              key={data.label}
               className={classes.chip}
               variant="outlined"
               color="primary"
@@ -154,7 +156,14 @@ const ProviderCard = props => {
             >
               Reserve
             </Button>
-            <ReserveDialog open={open} onClose={handleClose} provider={provider} history={history} isReserved={isReserved}/>
+            <ReserveDialog
+                open={open}
+                onClose={handleClose}
+                provider={provider}
+                history={history}
+                isReserved={isReserved}
+                user={user}
+            />
           </Grid>
         </Grid>
       </CardActions>
@@ -167,6 +176,7 @@ ProviderCard.propTypes = {
   provider: PropTypes.object.isRequired,
   history: PropTypes.object,
   isReserved: PropTypes.func.isRequired,
+  user: PropTypes.object,
 };
 
 export default ProviderCard;
