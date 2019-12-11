@@ -93,8 +93,8 @@ function AppAppBar(props) {
               className={classes.rightLink}
               to="/sign-in"
             >
-              {values.firstName}
-              {/*{'Sign In'}*/}
+              {/*{values.firstName}*/}
+              {'Sign In'}
             </RouterLink>
 
 

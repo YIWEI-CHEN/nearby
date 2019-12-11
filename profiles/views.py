@@ -104,7 +104,10 @@ def update_profiles(request):
 
 def create_profiles_for_google(request):
     print("come in create_profiles_for_google!!")
-    print(request.user)
+    print(request)
+    print(request.body)
+
+    # data = json.loads(request.body)["values"]
     data = {}
     data["user_id"] = request.user.id
     data["user"] = request.user
@@ -115,6 +118,10 @@ def create_profiles_for_google(request):
         pass
     else:
 
+        queryset = User.objects.filter(username=request.user)
+        queryset = json.loads(serializers.serialize("json", queryset))
+        print(queryset)
+        queryset = queryset[0]["fields"]
         try:
             data["email"] = queryset["email"]
         except Exception as e:
@@ -131,7 +138,10 @@ def create_profiles_for_google(request):
             print("no lastName")
 
         print("data: ", data)
+        # GeneralProfile.objects.filter(user_id=request.user.id).update(**data)
+
         GeneralProfile.objects.create(**data)
+        #
 
 
 
