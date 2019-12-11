@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProviderCard = props => {
-  const { className, provider, ...rest } = props;
+  const { className, provider, history, isReserved, ...rest } = props;
 
   const classes = useStyles();
 
@@ -82,6 +82,24 @@ const ProviderCard = props => {
           variant="h4"
         >
           {provider.name}
+        </Typography>
+        <Divider variant="middle" />
+        <Typography gutterBottom variant="body1">
+          Languages
+        </Typography>
+        {provider.languages.map(data => {
+          return (
+            <Chip
+              label={data}
+              className={classes.chip}
+              variant="outlined"
+              color="secondary"
+            />
+          );
+        })}
+        <Divider variant="middle" />
+        <Typography gutterBottom variant="body1">
+          Provided Services
         </Typography>
         {/*<Chip className={classes.chip} label="Measurement" variant="outlined"/>*/}
         {/*<Chip className={classes.chip} color="primary" label="Cleanness" variant="outlined"/>*/}
@@ -134,7 +152,7 @@ const ProviderCard = props => {
             >
               Reserve
             </Button>
-            <ReserveDialog open={open} onClose={handleClose} provider={provider} />
+            <ReserveDialog open={open} onClose={handleClose} provider={provider} history={history} isReserved={isReserved}/>
           </Grid>
         </Grid>
       </CardActions>
@@ -144,7 +162,9 @@ const ProviderCard = props => {
 
 ProviderCard.propTypes = {
   className: PropTypes.string,
-  provider: PropTypes.object.isRequired
+  provider: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  isReserved: PropTypes.func.isRequired,
 };
 
 export default ProviderCard;

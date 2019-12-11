@@ -21,14 +21,20 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path, include                 # add this
-from rest_framework import routers                    # add this
-from todo import views as todo_views                  # add this
+from django.urls import path, include, re_path
+from rest_framework import routers
+from todo import views as todo_views
+from carecases import views as care_case_views
+from profiles import views as profile_views
+
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
 
-router = routers.DefaultRouter()                      # add this
-router.register(r'todos', todo_views.TodoView, 'todo')     # add this
+router = routers.DefaultRouter()
+router.register(r'todos', todo_views.TodoView, 'todo')
+router.register('cares', care_case_views.CareCaseView, 'care')
+router.register('users', profile_views.UserDetailView, 'user')
+# router.register('providers', profile_views.ProviderListView, 'provider')
 
 urlpatterns = [
     # path('', index, name='index'),
@@ -48,7 +54,9 @@ urlpatterns = [
     path("db/", db, name="db"),
     path(r'accounts/',include('allauth.urls')),
     path(r'rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
-    path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login')
+    path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
 
+    path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
+    path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list')
 
 ]

@@ -1,7 +1,10 @@
+import random
+
 from creditcards.models import CardNumberField, CardExpiryField, SecurityCodeField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 from django_countries.fields import CountryField
@@ -9,9 +12,11 @@ from django_localflavor_us.models import USStateField
 from languages.fields import LanguageField
 from phonenumber_field.modelfields import PhoneNumberField
 
+from carecases.models import CareInfo
+
 
 class GeneralProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     phone_number = PhoneNumberField(_('phone number'), blank=True, null=True)
     GENDER_CHOICES = (
         ('M', 'Male'),
@@ -20,22 +25,21 @@ class GeneralProfile(models.Model):
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default='F')
     date_of_birth = models.DateField(_('date of birth'), blank=True, null=True)
 
-    CUSTOM_LANGUAGE_CHOICES = (
-        ("zh", _(u"Chinese")),
-        ("en", _(u"English")),
-        ("es", _(u"Spanish")),
-    )
-    language = LanguageField(_('preferred language'), default="en", choices=CUSTOM_LANGUAGE_CHOICES)
-
     is_taker = models.BooleanField(_('taker status'), default=False)
     is_provider = models.BooleanField(_('provider status'), default=False)
 
+    rate = models.FloatField(_('average rate'), default=2.5, blank=True)
+    num_of_comments = models.IntegerField(_('number of comments'), default=100, blank=True)
+    image_url = models.TextField(_('image url'),
+                              default='/static/images/avatars/avatar_5.png',
+                              blank=True)
+
     def __str__(self):
-        return 'The general profile of {}'.format(self.user.id)
+        return "{}'s general profile".format(self.user.username)
 
 
 class MedicalProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     MEDICARE_CHOICES = (
         ("A", _("A")),
         ("B", _("B")),
@@ -49,11 +53,11 @@ class MedicalProfile(models.Model):
     at_home_member = models.BooleanField(_('any family member at home'), default=False)
 
     def __str__(self):
-        return 'The medical profile of {}'.format(self.user.id)
+        return "{}'s medical profile".format(self.user.username)
 
 
 class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     address = models.CharField(_("address"), max_length=128)
 
@@ -66,7 +70,8 @@ class Address(models.Model):
     longitude = models.FloatField(_("longitude"), blank=True, null=True)
 
     def __str__(self):
-        return "{}, {}, {}, {}, {}".format(
+        return "{} lives in {}, {}, {}, {}, {}".format(
+                self.user.username,
                 self.address,
                 self.city,
                 self.state,
@@ -76,35 +81,57 @@ class Address(models.Model):
 
 
 class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     card_number = CardNumberField(_("card number"))
     card_expiry = CardExpiryField(_("expiration date"))
     card_code = SecurityCodeField(_("security code"))
 
     def __str__(self):
-        return 'Payment of {}'.format(self.user.id)
+        return "{}'s payment({})".format(self.user.username, str(self.card_number)[-4:])
 
 
-class CareService(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+# class CareService(models.Model):
+#     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+#
+#     # measurement
+#     blood_pressure = models.BooleanField(_('measure blood pressure'), default=False)
+#     blood_sugar = models.BooleanField(_('measure blood sugar'), default=False)
+#     temperature = models.BooleanField(_('measure body temperature'), default=False)
+#
+#     # cleanliness
+#     shower = models.BooleanField(_('help take a shower or tub bath'), default=False)
+#     hair_washing = models.BooleanField(_('help washing hair'), default=False)
+#     teeth_brushing = models.BooleanField(_('help brush teeth'), default=False)
+#     bed_bathing = models.BooleanField('help clean whole body with wet towel')
+#
+#     # feed
+#     food_feeding = models.BooleanField(_('help feed food'), default=False)
+#     medicine_feeding = models.BooleanField(_('help feed medicine'), default=False)
+#
+#     # exercise
+#     upper_limb_moving = models.BooleanField(_('help move upper limb'), default=False)
+#     lower_limb_moving = models.BooleanField(_('help move lower limb'), default=False)
+#     turn_over = models.BooleanField(_('help turn whole body over on bed'), default=False)
 
-    # measurement
-    blood_pressure = models.BooleanField(_('measure blood pressure'), default=False)
-    blood_sugar = models.BooleanField(_('measure blood sugar'), default=False)
-    temperature = models.BooleanField(_('measure body temperature'), default=False)
 
-    # cleanliness
-    shower = models.BooleanField(_('help take a shower or tub bath'), default=False)
-    hair_washing = models.BooleanField(_('help washing hair'), default=False)
-    teeth_brushing = models.BooleanField(_('help brush teeth'), default=False)
-    bed_bathing = models.BooleanField('help clean whole body with wet towel')
+class ProvidedCareService(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    care = models.ForeignKey(CareInfo, on_delete=models.CASCADE)
 
-    # feed
-    food_feeding = models.BooleanField(_('help feed food'), default=False)
-    medicine_feeding = models.BooleanField(_('help feed medicine'), default=False)
+    def __str__(self):
+        return '{} provides {}'.format(self.user.username, self.care.name)
 
-    # exercise
-    upper_limb_moving = models.BooleanField(_('help move upper limb'), default=False)
-    lower_limb_moving = models.BooleanField(_('help move lower limb'), default=False)
-    turn_over = models.BooleanField(_('help turn whole body over on bed'), default=False)
+
+class Language(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    CUSTOM_LANGUAGE_CHOICES = (
+        ("zh", _(u"Chinese")),
+        ("en", _(u"English")),
+        ("es", _(u"Spanish")),
+    )
+    language = LanguageField(_('language'), default="en", choices=CUSTOM_LANGUAGE_CHOICES)
+
+    def __str__(self):
+        mapping = dict(self.CUSTOM_LANGUAGE_CHOICES)
+        return '{} can speak {}'.format(self.user.username, mapping[self.language])
