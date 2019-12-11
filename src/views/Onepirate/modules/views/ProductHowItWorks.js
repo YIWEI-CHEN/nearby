@@ -67,13 +67,13 @@ function ProductHowItWorks(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productCurvyLines.png"
-          className={classes.curvyLines}
-          alt="curvy lines"
-        />
+        {/*<img*/}
+          {/*src="/static/themes/onepirate/productCurvyLines.png"*/}
+          {/*className={classes.curvyLines}*/}
+          {/*alt="curvy lines"*/}
+        {/*/>*/}
         <Typography variant="h4" marked="center" className={classes.title} component="h2">
-          How it works
+          Why use Nearby
         </Typography>
         <div>
           <Grid container spacing={5}>
@@ -81,12 +81,16 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
+                  src = "https://image.flaticon.com/icons/png/512/1058/1058854.png"
+                  // src="http://turnbowsigns.com/wp-content/uploads/nbdesigner/cliparts/hand/helping-hands.svg"
                   alt="suitcase"
                   className={classes.image}
                 />
+                <Typography variant="h6" className={classes.title}>
+                Helps on Demand
+              </Typography>
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                  Get the reliable help as you need with easy booking.
                 </Typography>
               </div>
             </Grid>
@@ -94,12 +98,15 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>2.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
+                  src="https://cdn3.iconfinder.com/data/icons/business-631/50/69-512.png"
                   alt="graph"
                   className={classes.image}
                 />
+                <Typography variant="h6" className={classes.title}>
+                Budget-friendly options
+                </Typography>
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited quantities, so be quick.
+                  Same quality but cheaper, and you can enjoy the service at home.
                 </Typography>
               </div>
             </Grid>
@@ -107,13 +114,15 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>3.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks3.svg"
+                  src="https://cdn4.iconfinder.com/data/icons/business-and-office-4-4/128/175-512.png"
                   alt="clock"
                   className={classes.image}
                 />
+                <Typography variant="h6" className={classes.title}>
+                Easy Location Access
+                </Typography>
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                  {'Find someone who needs help or can help you near you.'}
                 </Typography>
               </div>
             </Grid>
