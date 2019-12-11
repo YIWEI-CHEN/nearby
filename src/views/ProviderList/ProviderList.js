@@ -37,7 +37,7 @@ const ProviderList = props => {
   useEffect(() => {
     axios
       .get(
-        '/api/users/0/reserve/'
+        '/api/users/1/reserve/'
       )
       .then(({ data }) => {
         setReserved(data.reserved);
