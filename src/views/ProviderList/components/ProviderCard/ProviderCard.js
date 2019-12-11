@@ -23,12 +23,13 @@ const useStyles = makeStyles(theme => ({
     height: 64,
     width: 64,
     margin: '0 auto',
+    /*
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: '5px',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center'*/
   },
   image: {
     width: '100%'
@@ -38,12 +39,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   statsIcon: {
-    color: theme.palette.icon,
-    marginRight: theme.spacing(1)
+    //color: theme.palette.icon,
+    //marginRight: theme.spacing(1)
   },
   chip: {
-    marginRight: theme.spacing(0.8),
-    marginBottom: theme.spacing(0.8),
+    //marginRight: theme.spacing(0.8),
+    //marginBottom: theme.spacing(0.8),
   }
 }));
 
@@ -55,13 +56,13 @@ const ProviderCard = props => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    console.log("Open Dialogue");
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-
 
   return (
     <Card
@@ -148,6 +149,8 @@ const ProviderCard = props => {
               color="primary"
               variant="contained"
               size="small"
+              //onClick={handleClickOpen}
+              //onClick={setOpen(true)}
               onClick={handleClickOpen}
             >
               Reserve

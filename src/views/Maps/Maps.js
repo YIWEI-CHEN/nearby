@@ -4,7 +4,7 @@ import mockData from './data';
 import mockData2 from './data2';
 import { withStyles, makeStyles } from '@material-ui/styles';
 import { ProviderCard } from '../ProviderList/components';
-import { IconButton, Grid, Typography } from '@material-ui/core';
+import { IconButton, Grid, Typography, Button } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -17,35 +17,43 @@ import InputLabel from '@material-ui/core/InputLabel';
 const GOOGLE_API_KEY = 'AIzaSyAGWkTVfH4RA2sRbFN9dY489Q-T1At2Fqk';
 const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;
 
-var data = mockData
-const providers = mockData2;
+const providers = mockData;
+var filteredProviders = providers;
 //const [providers] = useState(mockData);
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
   },
-}));
+});
 
 class Canvas extends Component {
   state = {
       activeMarker: {},
+      activeProvider: {},
       selectedPlace: {},
       showingInfoWindow: false,
       initialCenter: {
         lat: 30.601389,
         lng: -96.314445
       },
-      checked_Eng: false,
-      checked_Spn: false,
-      checked_Chn: false,
-      checked_Kor: false,
+      checked_Eng: true,
+      checked_Spn: true,
+      checked_Chn: true,
   };
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => {
+    var clickProvider = "";
+    for (var i=0; i<mockData2.length; i++){
+      if (providers[i].name == marker.name) {
+        clickProvider = providers[i];
+      }
+    }
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
+      activeProvider: clickProvider,
       showingInfoWindow: true
-  });
+    });
+  }
   onInfoWindowClose = () =>
     this.setState({
       activeMarker: null,
@@ -53,30 +61,39 @@ class Canvas extends Component {
     });
 
   onMapClicked = () => {
-    console.log(mockData)
-    for (var i=0; i<mockData.length; i++) {
-      console.log(mockData[i].name);
-      console.log(mockData[i].location.lat);
+    console.log(mockData2)
+    for (var i=0; i<mockData2.length; i++) {
+      console.log(mockData2[i].name);
+      console.log(mockData2[i].location.lat);
     }
   };
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.checked
-    })
+      [name]: event.target.checked,
+    });
+    if (name == "checked_Chn"){
+      this.state.checked_Chn = event.target.checked
+    }else if (name == "checked_Eng"){
+      this.state.checked_Eng = event.target.checked
+    }else if (name == "checked_Spn"){
+      this.state.checked_Spn = event.target.checked
+    }
     // filter the markers
-    let newSelectedUsers = [];
-    data = mockData;
+    let display = [];
+    var data = mockData;
     for (var i=0; i<mockData.length; i++){
-      var langs = data[i].language.split(", ")
-      if (langs.includes(event.target.value)){
-        data.splice(i,1);
-        // TODO: disable the markers
+      var langs = data[i].languages;
+      if (this.state.checked_Eng==true && langs.includes("English")){
+        display.push(data[i]);
+      }else if(this.state.checked_Spn==true && langs.includes("Spanish")){
+        display.push(data[i]);
+      }else if(this.state.checked_Chn==true && langs.includes("Chinese")){
+        display.push(data[i]);
       }
     }
+    filteredProviders = display;
   };
   render() {
-    var langs = [];
-    //const {classes} = useStyles();
     if (!this.props.loaded) return <div>Loading...</div>;
     return (
       <Map
@@ -86,15 +103,11 @@ class Canvas extends Component {
         initialCenter={this.state.initialCenter}
         style={{ height: '90%', position: 'relative', width: '100%', up: '10px' }}
         zoom={13}>
-        {data.map(m => <Marker 
+        {filteredProviders.map(m => <Marker 
                     name={m.name} 
                     position={m.location}
-                    language={m.language}
-                    sex={m.sex}
-                    age={m.age}
                     onClick={this.onMarkerClick} 
                     />)}
-
         <div position="relative" left="30px" up="10px">
           <FormControlLabel
             control={
@@ -129,40 +142,14 @@ class Canvas extends Component {
             }
             label="Chinese"
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checked_Kor}
-                onChange={this.handleChange('checked_Kor')}
-                value="Korean"
-                color="primary"
-              />
-            }
-            label="Korean"
-          />
         </div>
-
+ 
         <InfoWindow
           marker={this.state.activeMarker}
           onClose={this.onInfoWindowClose}
           visible={this.state.showingInfoWindow}>
-          {providers.map(provider => (
-            <Grid
-              item
-              key={provider.id}
-              lg={4}
-              md={6}
-              xs={12}
-            >
-              <ProviderCard provider={provider} />
-            </Grid>
-          ))}
           <div>
-            <h2 align='center'>{this.state.selectedPlace.name}</h2>
-            <li>Language: {this.state.selectedPlace.language}</li>
-            <li>Sex: {this.state.selectedPlace.sex}</li>
-            <li>Age: {this.state.selectedPlace.age}</li>
-            <a align='center' href='test'>Select</a>
+            <ProviderCard provider={this.state.activeProvider} />
           </div>
         </InfoWindow>
       </Map>
@@ -173,3 +160,4 @@ class Canvas extends Component {
 export default GoogleApiWrapper({
   apiKey: (GOOGLE_API_KEY)
 })(Canvas)
+
