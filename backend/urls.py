@@ -29,7 +29,7 @@ from profiles import views as profile_views
 
 from .views import index
 from nearby.views import index, login, db, FacebookLogin, GoogleLogin
-from profiles.views import update_profiles, read_profiles
+from profiles.views import update_profiles, read_profiles, create_profiles, create_profiles_for_google
 
 router = routers.DefaultRouter()
 router.register(r'todos', todo_views.TodoView, 'todo')
@@ -56,6 +56,10 @@ urlpatterns = [
     path(r'rest-auth/google/', GoogleLogin.as_view(), name='gl_login'),
 
     path('update_profiles/', update_profiles),
+    path('create_profiles/', create_profiles),
+    path('create_profiles_for_google/', create_profiles_for_google),
+
+
     path('read_profiles/', read_profiles),
 
     path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
