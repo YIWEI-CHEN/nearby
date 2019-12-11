@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
-    'todo',
 
     # ahxt
     "nearby",
@@ -64,6 +63,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',
 
     'django_extensions',
+    'todo',
+    'carecases',
     'phonenumber_field',
     'django_countries',
     'languages',

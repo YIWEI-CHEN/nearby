@@ -31,12 +31,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReserveDialog = props =>  {
-  const { onClose, open, provider } = props;
+  const { onClose, open, isReserved, provider, history } = props;
   const classes = useStyles();
   const [checked, setChecked] = React.useState([1]);
 
   const handleClose = () => {
     onClose();
+  };
+
+  const handleReserve = () => {
+    isReserved(true);
+    history.push('/care');
   };
 
   const handleToggle = value => () => {
@@ -107,7 +112,7 @@ const ReserveDialog = props =>  {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" variant="contained">
+          <Button onClick={handleReserve} color="primary" variant="contained">
             Reserve
           </Button>
         </DialogActions>
@@ -118,8 +123,10 @@ const ReserveDialog = props =>  {
 
 ReserveDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
+  isReserved: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  provider: PropTypes.object.isRequired
+  provider: PropTypes.object.isRequired,
+  history: PropTypes.object
 };
 
 export default ReserveDialog;
