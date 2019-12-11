@@ -58,6 +58,7 @@ const AccountDetails = props => {
   ];
 
   return (
+
     <Card
       {...rest}
       className={clsx(classes.root, className)}
@@ -93,6 +94,8 @@ const AccountDetails = props => {
                 variant="outlined"
               />
             </Grid>
+
+
             <Grid
               item
               md={6}
@@ -125,6 +128,9 @@ const AccountDetails = props => {
                 variant="outlined"
               />
             </Grid>
+
+
+
             <Grid
               item
               md={6}
@@ -185,6 +191,9 @@ const AccountDetails = props => {
                 variant="outlined"
               />
             </Grid>
+
+
+
           </Grid>
         </CardContent>
         <Divider />
@@ -197,6 +206,9 @@ const AccountDetails = props => {
           </Button>
         </CardActions>
       </form>
+
+
+
     </Card>
   );
 };

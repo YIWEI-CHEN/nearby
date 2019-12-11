@@ -16,18 +16,25 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   Maps as MapsView,
-  Onepirate as HomeView
+  Onepirate as HomeView,
+    Payment as PaymentView,
 } from './views';
+import Payment from "./views/Payment/Payment";
 
 const Routes = () => {
   return (
     <Switch>
+
+
+
       <RouteWithLayout
         component={UserListView}
         exact
         layout={MainLayout}
         path="/under_guardianship"
       />
+
+
       <RouteWithLayout
         component={ProductListView}
         exact
@@ -45,12 +52,24 @@ const Routes = () => {
         layout={MainLayout}
         path="/dashboard"
       />
+
+
       <RouteWithLayout
         component={AccountView}
         exact
         layout={MainLayout}
         path="/account"
       />
+
+
+        <RouteWithLayout
+        component={PaymentView}
+        exact
+        layout={MainLayout}
+        path="/payment"
+      />
+
+
       <RouteWithLayout
         component={SettingsView}
         exact
