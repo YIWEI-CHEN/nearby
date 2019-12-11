@@ -17,12 +17,12 @@ import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
+    position: "absolute",
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    zIndex: "tooltip",
   },
   input: {
-    margin: theme.spacing(1),
   },
   container: {
     display: 'flex',
