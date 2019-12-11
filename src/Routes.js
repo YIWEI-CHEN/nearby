@@ -35,7 +35,6 @@ const Routes = () => {
         path="/under_guardianship"
       />
 
-
       <RouteWithLayout
         component={UserListView}
         exact

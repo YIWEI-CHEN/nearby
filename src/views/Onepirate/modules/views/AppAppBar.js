@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,6 +6,7 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import axios from "axios";
 
 const styles = theme => ({
   title: {
@@ -39,6 +40,34 @@ const styles = theme => ({
 function AppAppBar(props) {
   const { classes } = props;
 
+
+    const [values, setValues] = useState({
+    firstName: 'Sign In'
+
+  });
+
+    // const signInorOut  = "Sign Up"
+
+  useEffect(() => {
+    axios
+    .get(
+        '/read_profiles/'
+    )
+    .then(
+        ({data}) => {
+            console.log(data.result[0].fields);
+            const values = data.result[0].fields;
+            // console.log(data[0]);
+            setValues(values);
+            console.log(values);
+        });
+    }, []);
+
+
+
+  if( values.firstName )
+
+
   return (
     <div>
       <AppBar position="fixed">
@@ -53,7 +82,10 @@ function AppAppBar(props) {
           >
             {'nearby'}
           </Link>
+
           <div className={classes.right}>
+
+
             <RouterLink
               color="inherit"
               variant="h6"
@@ -61,8 +93,11 @@ function AppAppBar(props) {
               className={classes.rightLink}
               to="/sign-in"
             >
+              {/*{values.firstName}*/}
               {'Sign In'}
             </RouterLink>
+
+
             <RouterLink
               variant="h6"
               underline="none"
