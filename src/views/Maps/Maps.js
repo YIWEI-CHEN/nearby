@@ -17,7 +17,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 const GOOGLE_API_KEY = 'AIzaSyAGWkTVfH4RA2sRbFN9dY489Q-T1At2Fqk';
 const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;
 
-const providers = mockData2;
+const providers = mockData;
+var filteredProviders = providers;
 //const [providers] = useState(mockData);
 
 const styles = theme => ({
@@ -38,7 +39,6 @@ class Canvas extends Component {
       checked_Eng: true,
       checked_Spn: true,
       checked_Chn: true,
-      checked_Kor: true,
   };
   onMarkerClick = (props, marker, e) => {
     var clickProvider = "";
@@ -54,8 +54,6 @@ class Canvas extends Component {
       showingInfoWindow: true
     });
   }
-    
-    
   onInfoWindowClose = () =>
     this.setState({
       activeMarker: null,
@@ -71,22 +69,31 @@ class Canvas extends Component {
   };
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.checked
-    })
+      [name]: event.target.checked,
+    });
+    if (name == "checked_Chn"){
+      this.state.checked_Chn = event.target.checked
+    }else if (name == "checked_Eng"){
+      this.state.checked_Eng = event.target.checked
+    }else if (name == "checked_Spn"){
+      this.state.checked_Spn = event.target.checked
+    }
     // filter the markers
-    let newSelectedUsers = [];
-    var data = mockData2;
-    for (var i=0; i<mockData2.length; i++){
-      var langs = data[i].language.split(", ")
-      if (langs.includes(event.target.value)){
-        data.splice(i,1);
-        // TODO: disable the markers
+    let display = [];
+    var data = mockData;
+    for (var i=0; i<mockData.length; i++){
+      var langs = data[i].languages;
+      if (this.state.checked_Eng==true && langs.includes("English")){
+        display.push(data[i]);
+      }else if(this.state.checked_Spn==true && langs.includes("Spanish")){
+        display.push(data[i]);
+      }else if(this.state.checked_Chn==true && langs.includes("Chinese")){
+        display.push(data[i]);
       }
     }
+    filteredProviders = display;
   };
   render() {
-    var langs = [];
-    //const {classes} = useStyles();
     if (!this.props.loaded) return <div>Loading...</div>;
     return (
       <Map
@@ -96,15 +103,11 @@ class Canvas extends Component {
         initialCenter={this.state.initialCenter}
         style={{ height: '90%', position: 'relative', width: '100%', up: '10px' }}
         zoom={13}>
-        {providers.map(m => <Marker 
+        {filteredProviders.map(m => <Marker 
                     name={m.name} 
                     position={m.location}
-                    sex={m.gender}
-                    age={m.age}
                     onClick={this.onMarkerClick} 
                     />)}
-        
-
         <div position="relative" left="30px" up="10px">
           <FormControlLabel
             control={
@@ -138,17 +141,6 @@ class Canvas extends Component {
               />
             }
             label="Chinese"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.checked_Kor}
-                onChange={this.handleChange('checked_Kor')}
-                value="Korean"
-                color="primary"
-              />
-            }
-            label="Korean"
           />
         </div>
  
