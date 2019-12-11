@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     height: 64,
     width: 64,
     margin: '0 auto',
-    border: `1px solid ${theme.palette.divider}`,
+    //border: `1px solid ${theme.palette.divider}`,
     borderRadius: '5px',
     overflow: 'hidden',
     display: 'flex',
@@ -38,30 +38,30 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   statsIcon: {
-    color: theme.palette.icon,
-    marginRight: theme.spacing(1)
+    //color: theme.palette.icon,
+    //marginRight: theme.spacing(1)
   },
   chip: {
-    marginRight: theme.spacing(0.8),
-    marginBottom: theme.spacing(0.8),
+    //marginRight: theme.spacing(0.8),
+    //marginBottom: theme.spacing(0.8),
   }
 }));
 
 const ProviderCard = props => {
-  const { className, provider, ...rest } = props;
+  const { className, provider, history, isReserved, ...rest } = props;
 
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    console.log("Open Dialogue");
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-
 
   return (
     <Card
@@ -82,6 +82,24 @@ const ProviderCard = props => {
           variant="h4"
         >
           {provider.name}
+        </Typography>
+        <Divider variant="middle" />
+        <Typography gutterBottom variant="body1">
+          Languages
+        </Typography>
+        {provider.languages.map(data => {
+          return (
+            <Chip
+              label={data}
+              className={classes.chip}
+              variant="outlined"
+              color="secondary"
+            />
+          );
+        })}
+        <Divider variant="middle" />
+        <Typography gutterBottom variant="body1">
+          Provided Services
         </Typography>
         {/*<Chip className={classes.chip} label="Measurement" variant="outlined"/>*/}
         {/*<Chip className={classes.chip} color="primary" label="Cleanness" variant="outlined"/>*/}
@@ -130,11 +148,13 @@ const ProviderCard = props => {
               color="primary"
               variant="contained"
               size="small"
+              //onClick={handleClickOpen}
+              //onClick={setOpen(true)}
               onClick={handleClickOpen}
             >
               Reserve
             </Button>
-            <ReserveDialog open={open} onClose={handleClose} provider={provider} />
+            <ReserveDialog open={open} onClose={handleClose} provider={provider} history={history} isReserved={isReserved}/>
           </Grid>
         </Grid>
       </CardActions>
@@ -144,7 +164,9 @@ const ProviderCard = props => {
 
 ProviderCard.propTypes = {
   className: PropTypes.string,
-  provider: PropTypes.object.isRequired
+  provider: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  isReserved: PropTypes.func.isRequired,
 };
 
 export default ProviderCard;

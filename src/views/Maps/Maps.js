@@ -3,7 +3,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import mockData from './data';
 import mockData2 from './data2';
 import { withStyles, makeStyles } from '@material-ui/styles';
-import { ProviderCard } from '../ProviderList/components';
+import { ProviderCard } from './components';
 import { IconButton, Grid, Typography, Button } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -20,12 +20,6 @@ const google_map_URL = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_A
 const providers = mockData;
 var filteredProviders = providers;
 //const [providers] = useState(mockData);
-
-const styles = theme => ({
-  root: {
-  },
-});
-
 class Canvas extends Component {
   state = {
       activeMarker: {},
@@ -78,7 +72,6 @@ class Canvas extends Component {
     }else if (name == "checked_Spn"){
       this.state.checked_Spn = event.target.checked
     }
-    // filter the markers
     let display = [];
     var data = mockData;
     for (var i=0; i<mockData.length; i++){
