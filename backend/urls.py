@@ -21,7 +21,7 @@ Including another URLconf
 # ]
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 from todo import views as todo_views
 from carecases import views as care_case_views
@@ -39,6 +39,7 @@ router.register('users', profile_views.UserDetailView, 'user')
 
 urlpatterns = [
     # path('', index, name='index'),
+    re_path(r'^$', index),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
@@ -59,6 +60,7 @@ urlpatterns = [
     path('read_profiles/', read_profiles),
 
     path('api/users/<pk>/reserve/', profile_views.IsReservedView.as_view(), name='is_reserved'),
-    path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list')
+    path('api/providers/', profile_views.ProviderListView.as_view(), name='provider_list'),
+    re_path(r'^(?:.*)/?$', index)
 
 ]
