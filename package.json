@@ -10,7 +10,7 @@
     "anchor": "^1.4.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "clsx": "^1.0.4",
     "google-map-react": "^1.1.5",
     "google-maps-react": "^2.0.2",
