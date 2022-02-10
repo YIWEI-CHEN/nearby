@@ -17,7 +17,7 @@
     "history": "^4.9.0",
     "icons": "^1.0.0",
     "moment": "^2.24.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-app-rewired": "^2.1.4",
